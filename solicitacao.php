@@ -161,7 +161,16 @@ function ajax_abrir_os(){
         contentType: false,
         processData: false,
         success: function(dataResult) {
+            
             console.log(dataResult);
+
+            if(dataResult == '3'){
+
+                window.location.href="home.php";
+                
+            }
+           
+
         }
     });
     

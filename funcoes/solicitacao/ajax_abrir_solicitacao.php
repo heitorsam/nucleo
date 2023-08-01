@@ -1,8 +1,5 @@
 <?php 
 
-  //SESSION
-  session_start();
-
   //INICIANDO CONEXÃO
   include '../../conexao.php';
 
@@ -16,11 +13,11 @@
   $st_usuario_logado = $_POST['st_usuario_logado'];
   
   // Exibindo informações do usuário (remova essas linhas se não forem necessárias)
-  echo "Ramal: " . $var_inpt_ramal . "<br>";
-  echo "Email: " . $var_inpt_email . "<br>";
-  echo "Descrição: " . $var_inpt_descricao . "<br>";
-  echo "Motivo: " . $var_inpt_motivo . "<br>";
-  echo "Usuário Logado: " . $var_usuario_logado . "<br>";
+  //echo "Ramal: " . $var_inpt_ramal . "<br>";
+  //echo "Email: " . $var_inpt_email . "<br>";
+  //echo "Descrição: " . $var_inpt_descricao . "<br>";
+  //echo "Motivo: " . $var_inpt_motivo . "<br>";
+  //echo "Usuário Logado: " . $var_usuario_logado . "<br>";
 
   // Recupere o array de informações sobre o(s) arquivo(s) enviado(s)
   $file = $_FILES['arquivos'];
@@ -38,9 +35,9 @@
       $erro_do_arquivo = $file['error'][$i];
       
       // Exibindo informações do arquivo (remova essas linhas se não forem necessárias)
-      echo "Nome do Arquivo: " . $nome_do_arquivo . "<br>";
-      echo "Tipo do Arquivo: " . $tipo_do_arquivo . "<br>";
-      echo "Tamanho do Arquivo: " . $tamanho_do_arquivo . "<br>";
+      //echo "Nome do Arquivo: " . $nome_do_arquivo . "<br>";
+      //echo "Tipo do Arquivo: " . $tipo_do_arquivo . "<br>";
+      //echo "Tamanho do Arquivo: " . $tamanho_do_arquivo . "<br>";
       // Não exiba o caminho temporário nem o código de erro, pois não são relevantes para o usuário final.
   }
 
@@ -55,7 +52,7 @@
   $row_nextval = oci_fetch_array($res_next_os);
   $var_nextval = $row_nextval['CD_OS']; 
 
-  echo "Sequence: " . $var_nextval . "<br>";
+  //echo "Sequence: " . $var_nextval . "<br>";
 
   //INICIANDO O INSERT NA TABELA DE OS
 
@@ -130,6 +127,18 @@
       $result_tb_os = oci_parse($conn_ora, $consulta_tb_os);							
       $valida_chamado = oci_execute($result_tb_os);
 
+      if(!$valida_chamado){
+
+        $erro = oci_error($result_tb_os);
+        $msg_erro = htmlentities($erro['message']);
+        echo $msg_erro;
+
+      }else{
+
+        $count = 1;
+
+      }
+
     
 
     //EXECUTANDO INSERT OWNER PROJETO SOLICITACÃO
@@ -161,8 +170,21 @@
                                       NULL)";
 
                                   $result_insert = oci_parse($conn_ora, $insert_tabela_proj);							
-                                                  oci_execute($result_insert);
+                                  $valida_insert = oci_execute($result_insert);
+    
 
+    if(!$valida_insert){
+
+    $erro = oci_error($result_insert);
+    $msg_erro = htmlentities($erro['message']);
+    echo $msg_erro;
+
+    }else{
+
+    $count2 = 1;
+
+    }
+                                            
 
 
 
@@ -215,11 +237,20 @@ for ($i = 0; $i < $num_files; $i++) {
             // Escreva o conteúdo binário no BLOB
             if ($blob->save($conteudo_binario)) {
                 oci_commit($conn_ora);
-                echo "Arquivo " . $nome_do_arquivo . " inserido com sucesso no banco de dados.<br>";
+                //echo "Arquivo " . $nome_do_arquivo . " inserido com sucesso no banco de dados.<br>";
+
+                $count3 = 1;
+
+                $total = $count + $count2 + $count3;
+
+                echo $total;
+
             } else {
+
                 oci_rollback($conn_ora);
                 echo "Erro ao escrever o conteúdo do arquivo " . $nome_do_arquivo . " no banco de dados.<br>";
             }
+
         } else {
             oci_rollback($conn_ora);
             echo "Erro ao inserir o arquivo " . $nome_do_arquivo . ": " . oci_error($stmt) . "<br>";
@@ -236,10 +267,6 @@ for ($i = 0; $i < $num_files; $i++) {
     }
 }
 
-    
-    $_SESSION['msg'] = 'Solicitação '. $var_nextval .' com sucesso!';
 
-    header('Location: ../../home.php');
 
-    
 ?>
