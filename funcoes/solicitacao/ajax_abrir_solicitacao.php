@@ -1,4 +1,58 @@
 <?php 
+
+  //INICIANDO CONEXÃO
+  include '../../conexao.php';
+
+  //USUARIO LOGADO/DADOS PACIENTE 
+  $var_inpt_ramal = $_POST['inpt_ramal'];
+  $var_inpt_email = $_POST['inpt_email'];
+  $var_inpt_descricao = $_POST['descricao'];
+  $var_inpt_motivo = $_POST['motivo'];
+  $var_usuario_logado = $_POST['usuariologado'];
+  
+  // Exibindo informações do usuário (remova essas linhas se não forem necessárias)
+  echo "Ramal: " . $var_inpt_ramal . "<br>";
+  echo "Email: " . $var_inpt_email . "<br>";
+  echo "Descrição: " . $var_inpt_descricao . "<br>";
+  echo "Motivo: " . $var_inpt_motivo . "<br>";
+  echo "Usuário Logado: " . $var_usuario_logado . "<br>";
+
+  // Recupere o array de informações sobre o(s) arquivo(s) enviado(s)
+  $file = $_FILES['arquivos'];
+
+  // Verifique se foram enviados múltiplos arquivos
+  $num_files = count($file['name']);
+
+  // Faça um loop para percorrer todas as informações dos arquivos
+  for ($i = 0; $i < $num_files; $i++) {
+      // Informações do arquivo atual
+      $nome_do_arquivo = $file['name'][$i];
+      $tipo_do_arquivo = $file['type'][$i];
+      $tamanho_do_arquivo = $file['size'][$i];
+      $caminho_temporario = $file['tmp_name'][$i];
+      $erro_do_arquivo = $file['error'][$i];
+      
+      // Exibindo informações do arquivo (remova essas linhas se não forem necessárias)
+      echo "Nome do Arquivo: " . $nome_do_arquivo . "<br>";
+      echo "Tipo do Arquivo: " . $tipo_do_arquivo . "<br>";
+      echo "Tamanho do Arquivo: " . $tamanho_do_arquivo . "<br>";
+      // Não exiba o caminho temporário nem o código de erro, pois não são relevantes para o usuário final.
+  }
+
+  //CRIANDO SEQUENCE DA TEBELA DE OS MV
+  $nextval_os = "SELECT SEQ_OS.NEXTVAL AS CD_OS 
+                 FROM DUAL";
+  $res_next_os = oci_parse($conn_ora, $nextval_os);
+      $nextval = oci_execute($result_nextval);
+
+  //COLETANDO O VALOR DA SEQUENCE 
+  $row_nextval = oci_fetch_array($result_nextval);
+  $var_nextval = $row_nextval['CD_OS']; 
+
+
+
+/*
+
     include '../../conexao.php';
 
     session_start();
@@ -34,10 +88,9 @@
 
   $var_nextval = $row_nextval['CD_OS']; 
 
-  
 
-// INSERT NA TABELA DE OS
-   $consulta_tb_os = "INSERT INTO dbamv.SOLICITACAO_OS 
+  // INSERT NA TABELA DE OS
+  $consulta_tb_os = "INSERT INTO dbamv.SOLICITACAO_OS 
                           SELECT $var_nextval AS CD_OS,
                           TO_DATE(SYSDATE, 'dd/mm/yy hh24:mi:ss') AS DT_PEDIDO,
                           '$descricao' as DS_SERVICO, 
@@ -116,7 +169,6 @@
 
 
     //INSERT TABELA PROJETOS SOLICITACÃO
-
     $insert_tabela_proj = "INSERT INTO portal_projetos.solicitacao
                             (CD_SOLICITACAO, 
                             CD_OS_MV, 
@@ -195,5 +247,8 @@
     }
     $_SESSION['msg'] = 'Solicitação '. $var_nextval .' com sucesso!';
     header('Location: ../../home.php');
+
+
+    */
 
 ?>

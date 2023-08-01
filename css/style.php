@@ -397,7 +397,7 @@ p,li{
 
 overflow-y: scroll;
 width: 100%;
-height: 80px;
+height: 60px !important;
 padding: 12px 20px;
 box-sizing: border-box;
 border: 2px solid #ccc;

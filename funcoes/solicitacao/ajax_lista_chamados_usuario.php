@@ -1,11 +1,5 @@
 <?php
 
-    if($_SESSION['SN_ADM'] == 'S'){
-        $class = "btn-adm";
-    }else{
-        $class = "btn-primary";
-    }
-
     $usu = $_SESSION['usuarioLogin'];
 
     $lista_chamados = "SELECT vw.TIPO,

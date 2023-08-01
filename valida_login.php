@@ -20,34 +20,16 @@
 		
 		echo $usuario;	echo '</br>'; echo $senha; echo '</br>';
 		
-		$result_usuario = oci_parse($conn_ora, "SELECT portal_projetos.VALIDA_SENHA_FUNC_LOGIN(:usuario,:senha) AS RESP_LOGIN,
+		$result_usuario = oci_parse($conn_ora, "SELECT nucleoinfo.VALIDA_SENHA_FUNC_LOGIN(:usuario,:senha) AS RESP_LOGIN,
 												(SELECT INITCAP(usu.NM_USUARIO)
 												FROM dbasgu.USUARIOS usu
 												WHERE usu.CD_USUARIO = :usuario) AS NM_USUARIO,		
 												CASE
 													WHEN :usuario IN (SELECT DISTINCT puia.CD_USUARIO
 																		FROM dbasgu.PAPEL_USUARIOS puia
-																		WHERE puia.CD_PAPEL = 424) THEN 'S' --USUARIO COMUM
+																		WHERE puia.CD_PAPEL = 477) THEN 'S' --PAPEL GLOBAL DE ACESSO
 													ELSE 'N'
-												END SN_USU,											
-												CASE
-													WHEN :usuario IN (SELECT DISTINCT puia.CD_USUARIO
-																		FROM dbasgu.PAPEL_USUARIOS puia
-																		WHERE puia.CD_PAPEL = 425) THEN 'S' --ANALISTA
-													ELSE 'N'
-												END SN_ADM,
-												CASE
-													WHEN :usuario IN (SELECT DISTINCT puia.CD_USUARIO
-																		FROM dbasgu.PAPEL_USUARIOS puia
-																		WHERE puia.CD_PAPEL = 426) THEN 'S' --AUXILIAR
-													ELSE 'N'
-												END SN_AUX,
-												CASE
-													WHEN :usuario IN (SELECT DISTINCT puia.CD_USUARIO
-																		FROM dbasgu.PAPEL_USUARIOS puia
-																		WHERE puia.CD_PAPEL = 427) THEN 'S' --SUPORTE
-													ELSE 'N'
-												END SN_SUP
+												END SN_USU_GLOBAL
 
 												FROM DUAL");																															
 												
@@ -66,24 +48,9 @@
 			
 			if($resultado[0] == 'Login efetuado com sucesso') {
 
-				$cons_acesso_login="INSERT INTO portal_projetos.ACESSO
-				SELECT portal_projetos.SEQ_CD_ACESSO.NEXTVAL AS CD_ACESSO,
-				32 AS CD_PORTFOLIO,
-				'PORTAL PROJETOS' AS DS_PROJETO,
-				'$usuario' AS CD_USUARIO_ACESSO,
-				SYSDATE AS HR_ACESSO
-				FROM DUAL";
-
-				$result_acesso = oci_parse($conn_ora,$cons_acesso_login);
-
-				$valida_acesso = oci_execute($result_acesso);
-
 				$_SESSION['usuarioLogin'] = $usuario;
 				$_SESSION['usuarioNome'] = $resultado[1];
-				$_SESSION['SN_USU'] = $resultado[2];
-				$_SESSION['SN_ADM'] = $resultado[3];
-				$_SESSION['SN_AUX'] = $resultado[4];
-				$_SESSION['SN_SUP'] = $resultado[5];
+				$_SESSION['SN_USU_GLOBAL'] = $resultado[2];
 
 				header("Location: $pag_apos");	
 					
