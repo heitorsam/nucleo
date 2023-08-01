@@ -1,5 +1,8 @@
 <?php 
 
+  //SESSION
+  session_start();
+
   //INICIANDO CONEXÃO
   include '../../conexao.php';
 
@@ -9,6 +12,8 @@
   $var_inpt_descricao = $_POST['descricao'];
   $var_inpt_motivo = $_POST['motivo'];
   $var_usuario_logado = $_POST['usuariologado'];
+  $var_nome_usuario_logado = $_POST['nm_usuario_logado'];
+  $st_usuario_logado = $_POST['st_usuario_logado'];
   
   // Exibindo informações do usuário (remova essas linhas se não forem necessárias)
   echo "Ramal: " . $var_inpt_ramal . "<br>";
@@ -39,71 +44,36 @@
       // Não exiba o caminho temporário nem o código de erro, pois não são relevantes para o usuário final.
   }
 
+
   //CRIANDO SEQUENCE DA TEBELA DE OS MV
   $nextval_os = "SELECT SEQ_OS.NEXTVAL AS CD_OS 
                  FROM DUAL";
   $res_next_os = oci_parse($conn_ora, $nextval_os);
-      $nextval = oci_execute($result_nextval);
+      $nextval = oci_execute($res_next_os);
 
   //COLETANDO O VALOR DA SEQUENCE 
-  $row_nextval = oci_fetch_array($result_nextval);
+  $row_nextval = oci_fetch_array($res_next_os);
   $var_nextval = $row_nextval['CD_OS']; 
 
+  echo "Sequence: " . $var_nextval . "<br>";
 
+  //INICIANDO O INSERT NA TABELA DE OS
 
-/*
-
-    include '../../conexao.php';
-
-    session_start();
-
-    //print_r($_FILES);
-    $count = count($_FILES['image']['name']);
-    $var_usuario = $_SESSION['usuarioLogin'];
-    $prioridade = $_POST['prioridade'];
-    $tipo = $_POST['tipo']; 
-    //$prazo = $_POST['prazo']; 
-   print_r($_FILES);
-    $descricao =  $_POST['descricao'];
-    $email = $_POST['inpt_email'];
-    $ramal = $_POST['inpt_ramal'];
-    
-    
-    
-    //echo $prioridade . ' ' . $responsavel . ' ' . $descricao . ' ' . $anexos . ' ' . $var_usuario ;
-
-    ////////////////////
-  ///CONSULTA BANCO/// 
- ////////////////////
-
-
-//nextval os
-  $consulta_nextval="SELECT SEQ_OS.NEXTVAL AS CD_OS FROM DUAL";
-
-  $result_nextval = oci_parse($conn_ora, $consulta_nextval);							
-
-//EXECUTANDO A CONSULTA SQL (ORACLE) [VALIDANDO AO MESMO TEMPO]
-  $nextval = oci_execute($result_nextval);
-  $row_nextval = oci_fetch_array($result_nextval);
-
-  $var_nextval = $row_nextval['CD_OS']; 
-
-
-  // INSERT NA TABELA DE OS
+  //INSERT NA TABELA DE OS
   $consulta_tb_os = "INSERT INTO dbamv.SOLICITACAO_OS 
                           SELECT $var_nextval AS CD_OS,
                           TO_DATE(SYSDATE, 'dd/mm/yy hh24:mi:ss') AS DT_PEDIDO,
-                          '$descricao' as DS_SERVICO, 
-                          '$descricao' as DS_OBSERVACAO,
+                          '$var_inpt_descricao' as DS_SERVICO, 
+                          '$var_inpt_motivo' as DS_OBSERVACAO,
                           NULL AS DT_EXECUCAO,
                           NULL as DT_PREV_EXEC,
-                          '$var_usuario' as NM_SOLICITANTE,
+                          '$var_nome_usuario_logado' as NM_SOLICITANTE,
                           'A' as TP_SITUACAO,
-                          186 as CD_SETOR, 
+                          $st_usuario_logado as CD_SETOR, 
                           1 as CD_MULTI_EMPRESA,
                           NULL as CD_ESPEC,
                           87 as CD_TIPO_OS, 
-                          '$var_usuario' as NM_USUARIO,
+                          '$var_usuario_logado' as NM_USUARIO,
                           SYSDATE as DT_ULTIMA_ATUALIZACAO, 
                           NULL as CD_LOCALIDADE, 
                           NULL as TP_LOCAL,
@@ -129,7 +99,7 @@
                           NULL as CD_USUARIO_REPROVA_OS,
                           NULL DT_USUARIO_REPROVA_OS,
                           NULL DT_ENTREGA, 
-                          '$prioridade' as TP_PRIORIDADE,
+                          'M' as TP_PRIORIDADE,
                           NULL as QT_PRONTUARIOS,
                           'N' as SN_RECEBIDA,
                           NULL as CD_RESPONSAVEL,
@@ -157,98 +127,119 @@
                           NULL as CD_USUARIO_CANCELAMENTO,
                           NULL as TP_PRIORIDADE_MODIFIC_NO_RECEB
                           FROM DUAL";
-
-      //$teste = '</br></br>' . $consulta_tb_os . '</br>';
-      //echo '</br>'. $teste . '</br>';
       $result_tb_os = oci_parse($conn_ora, $consulta_tb_os);							
-
-      //EXECUTANDO A CONSULTA SQL (ORACLE) [VALIDANDO AO MESMO TEMPO]
-      
       $valida_chamado = oci_execute($result_tb_os);
 
+    
+
+    //EXECUTANDO INSERT OWNER PROJETO SOLICITACÃO
+    $insert_tabela_proj = "INSERT INTO nucleoinfo.solicitacao
+                                      (CD_SOLICITACAO, 
+                                      CD_OS_MV, 
+                                      CD_RESPONSAVEL,
+                                      TP_PRIORIDADE,
+                                      TP_TIPO, 
+                                      ESTIMATIVA_ENTREGA, 
+                                      RAMAL_SOLICITANTE,
+                                      EMAIL_SOLICITANTE,
+                                      CD_USUARIO_CADASTRO,
+                                      HR_CADASTRO, 
+                                      CD_USUARIO_ULT_ALT,
+                                      HR_ULT_ALT)
+                                      VALUES
+                                      (nucleoinfo.SEQ_CD_SOLICITACAO.nextval,
+                                      '$var_nextval',
+                                      NULL,
+                                      'M',
+                                      'S', 
+                                      NULL, 
+                                      '$var_inpt_ramal',
+                                      '$var_inpt_email',
+                                      '$var_usuario_logado', 
+                                      SYSDATE, 
+                                      NULL,
+                                      NULL)";
+
+                                  $result_insert = oci_parse($conn_ora, $insert_tabela_proj);							
+                                                  oci_execute($result_insert);
 
 
-    //INSERT TABELA PROJETOS SOLICITACÃO
-    $insert_tabela_proj = "INSERT INTO portal_projetos.solicitacao
-                            (CD_SOLICITACAO, 
-                            CD_OS_MV, 
-                            CD_RESPONSAVEL,
-                            TP_PRIORIDADE,
-                            TP_TIPO, 
-                            ESTIMATIVA_ENTREGA, 
-                            RAMAL_SOLICITANTE,
-                            EMAIL_SOLICITANTE,
-                            CD_USUARIO_CADASTRO,
-                            HR_CADASTRO, 
-                            CD_USUARIO_ULT_ALT,
-                             HR_ULT_ALT)
-                            VALUES
-                            (portal_projetos.SEQ_CD_SOLICITACAO.nextval,
-                            '$var_nextval',
-                            NULL,
-                            '$prioridade',
-                            '$tipo', 
-                            NULL, 
-                            '$ramal',
-                            '$email',
-                            '$var_usuario', 
-                            SYSDATE, 
-                            '$var_usuario',
-                            SYSDATE)";
 
-    $result_insert = oci_parse($conn_ora, $insert_tabela_proj);							
 
-    //EXECUTANDO A CONSULTA SQL (ORACLE) [VALIDANDO AO MESMO TEMPO]
-      
-    oci_execute($result_insert);
 
-    for ($i= 0; $i < $count; $i++){
-      
-      $file = $_FILES['image']['name'][$i];
-      
-      $image = $_FILES['image']['tmp_name'][$i];
-      $extensao = strtolower(pathinfo($file,PATHINFO_EXTENSION));
-      $image = file_get_contents($image);
+// Faça um loop para percorrer todas as informações dos arquivos
+for ($i = 0; $i < $num_files; $i++) {
 
-      $insert_gal = "INSERT INTO PORTAL_PROJETOS.ANEXOS
-                                  (CD_ANEXOS, 
-                                    CD_SOLICITACAO,
-                                    DOCUMENTO, 
-                                    EXTENSAO,
-                                    CD_USUARIO_CADASTRO, 
-                                    HR_CADASTRO, 
-                                    CD_USUARIO_ULT_ALT, 
-                                    HR_ULT_ALT)
-                                  VALUES (portal_projetos.SEQ_CD_ANEXOS.nextval, 
-                                          $var_nextval,
-                                          empty_blob(),
-                                          '$extensao',
-                                          '$var_usuario',
-                                          SYSDATE,
-                                          NULL,
-                                          NULL) RETURNING DOCUMENTO INTO :image";
+    // Informações do arquivo atual
+    $caminho_temporario = $file['tmp_name'][$i];
+    $tipo_do_arquivo = $file['type'][$i];
 
-                          //echo $consulta_insert;
-                              $insere_dados = oci_parse($conn_ora, $insert_gal);
-                              $blob = oci_new_descriptor($conn_ora, OCI_D_LOB);
-                              oci_bind_by_name($insere_dados, ":image", $blob, -1, OCI_B_BLOB);
+    // Abra o arquivo em modo binário para leitura
+    $conteudo_arquivo = file_get_contents($caminho_temporario);
 
-                              oci_execute($insere_dados, OCI_DEFAULT);
+    // Se o arquivo foi lido com sucesso, insira o conteúdo no banco de dados
+    if ($conteudo_arquivo !== false) {
 
-                              if(!$blob->save($image)) {
-                                  oci_rollback($conn_ora);
-                              }
-                              else {
-                                  oci_commit($conn_ora);
-                              }
+        // Prepare os dados para inserção na tabela
+        $nome_do_arquivo = $file['name'][$i];
+        $extensao_do_arquivo = pathinfo($nome_do_arquivo, PATHINFO_EXTENSION);
+        $conteudo_binario = $conteudo_arquivo;
+        $cd_usuario_cadastro = $var_usuario_logado;
+        $hr_cadastro = date('Y-m-d H:i:s');
+        $cd_usuario_ult_alt = NULL;
+        $hr_ult_alt =  NULL;
 
-                              oci_free_statement($insere_dados);
-                              $blob->free();
+        // Prepare a consulta SQL para inserção do arquivo
+        // Substitua "nucleoinfo.ANEXOS" pelos nomes corretos da sua tabela e colunas
+        $sql = "INSERT INTO nucleoinfo.ANEXOS (CD_ANEXOS, CD_OS_MV, DOCUMENTO, EXTENSAO, CD_USUARIO_CADASTRO, HR_CADASTRO, CD_USUARIO_ULT_ALT, HR_ULT_ALT) 
+                VALUES (nucleoinfo.SEQ_CD_ANEXOS.NEXTVAL, :cd_os_mv, EMPTY_BLOB(), :extensao, :cd_usuario_cadastro, TO_TIMESTAMP(:hr_cadastro, 'YYYY-MM-DD HH24:MI:SS'), :cd_usuario_ult_alt, TO_TIMESTAMP(:hr_ult_alt, 'YYYY-MM-DD HH24:MI:SS'))
+                RETURNING DOCUMENTO INTO :blob";
+
+        // Prepare a consulta SQL
+        $stmt = oci_parse($conn_ora, $sql);
+
+        // Associe os parâmetros BLOB e outros usando bind by name
+        $blob = oci_new_descriptor($conn_ora, OCI_D_LOB);
+        oci_bind_by_name($stmt, ':cd_os_mv', $var_nextval);
+        oci_bind_by_name($stmt, ':extensao', $extensao_do_arquivo);
+        oci_bind_by_name($stmt, ':cd_usuario_cadastro', $cd_usuario_cadastro);
+        oci_bind_by_name($stmt, ':hr_cadastro', $hr_cadastro);
+        oci_bind_by_name($stmt, ':cd_usuario_ult_alt', $cd_usuario_ult_alt);
+        oci_bind_by_name($stmt, ':hr_ult_alt', $hr_ult_alt);
+        oci_bind_by_name($stmt, ':blob', $blob, -1, OCI_B_BLOB);
+
+        // Execute a consulta SQL
+        $result = oci_execute($stmt, OCI_DEFAULT);
+
+        if ($result) {
+            // Escreva o conteúdo binário no BLOB
+            if ($blob->save($conteudo_binario)) {
+                oci_commit($conn_ora);
+                echo "Arquivo " . $nome_do_arquivo . " inserido com sucesso no banco de dados.<br>";
+            } else {
+                oci_rollback($conn_ora);
+                echo "Erro ao escrever o conteúdo do arquivo " . $nome_do_arquivo . " no banco de dados.<br>";
+            }
+        } else {
+            oci_rollback($conn_ora);
+            echo "Erro ao inserir o arquivo " . $nome_do_arquivo . ": " . oci_error($stmt) . "<br>";
+        }
+
+        // Feche o cursor e o descritor do BLOB
+        oci_free_statement($stmt);
+        $blob->free();
+
+    } else {
+
+        echo "Erro ao abrir o arquivo " . $nome_do_arquivo . "<br>";
+
     }
+}
+
+    
     $_SESSION['msg'] = 'Solicitação '. $var_nextval .' com sucesso!';
+
     header('Location: ../../home.php');
 
-
-    */
-
+    
 ?>

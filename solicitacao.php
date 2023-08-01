@@ -126,6 +126,8 @@ function ajax_abrir_os(){
 
    //RECEBENDO OS DADOS DO FORMULARIO
     var usuario_logado = '<?php echo $var_usuario ?>';
+    var nome_usuario_logado = '<?php echo $row_usuario['NM_USUARIO'] ?>';
+    var setor_usuario_logado = '<?php echo $row_setor['CD_SETOR'] ?>';
 
     var inpt_ramal = $("#inpt_ramal").val();
     var inpt_email = $("#inpt_email").val();
@@ -141,6 +143,8 @@ function ajax_abrir_os(){
     formData.append('descricao', descricao);
     formData.append('motivo', motivo);
     formData.append('usuariologado', usuario_logado);
+    formData.append('nm_usuario_logado', nome_usuario_logado);
+    formData.append('st_usuario_logado', setor_usuario_logado);
 
     // Adicionar os arquivos anexados ao objeto FormData
     for (var i = 0; i < fileInput.files.length; i++) {
