@@ -1,0 +1,8 @@
+EDITAR O PHP.INI
+
+upload_max_filesize=640M
+max_file_uploads=200
+post_max_size=640M
+memory_limit=512M
+
+max_execution_time=150

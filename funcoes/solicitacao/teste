@@ -1,0 +1,448 @@
+<tr><div class='fnd_azul'><i class="fas fa-paper-plane efeito-zoom"></i> Solicitado</div></tr>
+            
+<!--TABELA DE RESULTADOS -->
+<div class="table-responsive col-md-12">
+    <table class="table table-fixed table-hover table-striped " cellspacing="0" cellpadding="0">
+
+        <div class="div_br"> </div>
+        <thead><tr>
+            <!--COLUNAS--> 
+            <th class="align-middle" style="text-align: center !important;"><span>Tipo</span></th>
+            <th class="align-middle" style="text-align: center !important;"><span>OS</span></th>
+            <th class="align-middle" style="text-align: center !important;"><span>Data Solicitação</span></th>
+            <th class="align-middle" style="text-align: center !important;"><span>Solicitante</span></th>
+            <th class="align-middle" style="text-align: center !important;"><span>Responsável</span></th>
+            <th class="align-middle" style="text-align: center !important;"><span>Opções</span></th>
+        </tr></thead> 
+
+              
+                    
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835646</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>HEITOR SCALABRINI SAMPAIO</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835646)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835647</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>HEITOR SCALABRINI SAMPAIO</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835647)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835650</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>LEONARDO DO PRADO GOMES</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835650)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835652</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835652)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835653</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835653)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835655</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835655)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835663</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835663)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835664</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>LEONARDO DO PRADO GOMES</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835664)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835665</td>
+            <td class='align-middle' style='text-align: center;'>21/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835665)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835666</td>
+            <td class='align-middle' style='text-align: center;'>21/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835666)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835667</td>
+            <td class='align-middle' style='text-align: center;'>21/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835667)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Solicitado</td>
+            <td class='align-middle' style='text-align: center;'>835668</td>
+            <td class='align-middle' style='text-align: center;'>21/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'></td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835668)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+    </table>
+</div>
+<tr><div class='fnd_azul'><i class="fas fa-user-check efeito-zoom"></i> Recebido</div></tr>
+            
+<!--TABELA DE RESULTADOS -->
+<div class="table-responsive col-md-12">
+    <table class="table table-fixed table-hover table-striped " cellspacing="0" cellpadding="0">
+
+
+        <div class="div_br"> </div>
+        <thead>
+            <tr>
+                <!--COLUNAS--> 
+                <th class="align-middle" style="text-align: center !important;"><span>Tipo</span></th>
+                <th class="align-middle" style="text-align: center !important;"><span>OS</span></th>
+                <th class="align-middle" style="text-align: center !important;"><span>Data Solicitação</span></th>
+                <th class="align-middle" style="text-align: center !important;"><span>Solicitante</span></th>
+                <th class="align-middle" style="text-align: center !important;"><span>Responsável</span></th>
+                <th class="align-middle" style="text-align: center !important;"><span>Opções</span></th>
+            </tr>
+        </thead> 
+
+              
+                    
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Recebido</td>
+            <td class='align-middle' style='text-align: center;'>565347</td>
+            <td class='align-middle' style='text-align: center;'>27/10/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>HEITOR SCALABRINI SAMPAIO</td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="call_chat(565347,'Recebido')"><i class="fa-solid fa-comment"></i></a>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(565347)"> <i class="fa-solid fa-info"></i> </a>
+                                    <a class='btn btn-adm' onclick="ajax_modal_just(565347,'V')"><i class="fa-solid fa-scroll"></i></a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Recebido</td>
+            <td class='align-middle' style='text-align: center;'>835643</td>
+            <td class='align-middle' style='text-align: center;'>09/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>LENINE MARCONDES DE AGUIAR</td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="call_chat(835643,'Recebido')"><i class="fa-solid fa-comment"></i></a>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835643)"> <i class="fa-solid fa-info"></i> </a>
+                                    <a class='btn btn-adm' onclick="ajax_modal_just(835643,'V')"><i class="fa-solid fa-scroll"></i></a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Recebido</td>
+            <td class='align-middle' style='text-align: center;'>835649</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>LEONARDO DO PRADO GOMES</td>
+            <td class='align-middle' style='text-align: center;'>HEITOR SCALABRINI SAMPAIO</td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="call_chat(835649,'Recebido')"><i class="fa-solid fa-comment"></i></a>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835649)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Recebido</td>
+            <td class='align-middle' style='text-align: center;'>835654</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>HEITOR SCALABRINI SAMPAIO</td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="call_chat(835654,'Recebido')"><i class="fa-solid fa-comment"></i></a>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835654)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Recebido</td>
+            <td class='align-middle' style='text-align: center;'>835669</td>
+            <td class='align-middle' style='text-align: center;'>21/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>ARIENE CARLA PEREIRA GIOVANELLI</td>
+            <td class='align-middle' style='text-align: center;'>HEITOR SCALABRINI SAMPAIO</td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="call_chat(835669,'Recebido')"><i class="fa-solid fa-comment"></i></a>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(835669)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+    </table>
+</div>
+    <div class="row">
+        <div class="col-md-2">
+            Data:
+            <input type="month" class="form-control">
+        </div>
+    </div>
+    </br>
+<tr><div class='fnd_azul'><i class="fas fa-user-check efeito-zoom"></i> Concluído</div></tr>
+    
+                <!--TABELA DE RESULTADOS -->
+<div class="table-responsive col-md-12">
+    <table class="table table-fixed table-hover table-striped " cellspacing="0" cellpadding="0">
+
+
+        <div class="div_br"> </div>
+        <thead>
+            <tr>
+                <!--COLUNAS--> 
+                <th class="align-middle" style="text-align: center !important;"><span>Tipo</span></th>
+                <th class="align-middle" style="text-align: center !important;"><span>OS</span></th>
+                <th class="align-middle" style="text-align: center !important;"><span>Data Solicitação</span></th>
+                <th class="align-middle" style="text-align: center !important;"><span>Solicitante</span></th>
+                <th class="align-middle" style="text-align: center !important;"><span>Responsável</span></th>
+                <th class="align-middle" style="text-align: center !important;"><span>Opções</span></th>
+            </tr>
+        </thead> 
+
+              
+                    
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Concluído</td>
+            <td class='align-middle' style='text-align: center;'>565342</td>
+            <td class='align-middle' style='text-align: center;'>27/10/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>ALEXANDRE VICTOR VIEIRA DE MELO</td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="call_chat(565342,'Concluído')"><i class="fa-solid fa-comment"></i></a>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(565342)"> <i class="fa-solid fa-info"></i> </a>
+                                    <a class='btn btn-adm' onclick="ajax_modal_just(565342,'V')"><i class="fa-solid fa-scroll"></i></a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Concluído</td>
+            <td class='align-middle' style='text-align: center;'>565343</td>
+            <td class='align-middle' style='text-align: center;'>27/10/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>ALEXANDRE VICTOR VIEIRA DE MELO</td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(565343)"> <i class="fa-solid fa-info"></i> </a>
+                                    <a class='btn btn-adm' onclick="ajax_modal_just(565343,'V')"><i class="fa-solid fa-scroll"></i></a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Concluído</td>
+            <td class='align-middle' style='text-align: center;'>565344</td>
+            <td class='align-middle' style='text-align: center;'>27/10/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>ALEXANDRE VICTOR VIEIRA DE MELO</td>
+            <td class='align-middle' style='text-align: center;'>
+                                    <a class='btn btn-adm' onclick="ajax_modal_sol(565344)"> <i class="fa-solid fa-info"></i> </a>
+                                                    </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Concluído</td>
+            <td class='align-middle' style='text-align: center;'>565345</td>
+            <td class='align-middle' style='text-align: center;'>27/10/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>ALEXANDRE VICTOR VIEIRA DE MELO</td>
+            <td class='align-middle' style='text-align: center;'>
+                <a class='btn btn-adm' onclick="ajax_modal_sol(565345)"> <i class="fa-solid fa-info"></i> </a>
+            </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Concluído</td>
+            <td class='align-middle' style='text-align: center;'>565348</td>
+            <td class='align-middle' style='text-align: center;'>27/10/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>ALEXANDRE VICTOR VIEIRA DE MELO</td>
+            <td class='align-middle' style='text-align: center;'>
+                <a class='btn btn-adm' onclick="ajax_modal_sol(565348)"> <i class="fa-solid fa-info"></i> </a>
+            </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Concluído</td>
+            <td class='align-middle' style='text-align: center;'>565352</td>
+            <td class='align-middle' style='text-align: center;'>28/10/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>ALEXANDRE VICTOR VIEIRA DE MELO</td>
+            <td class='align-middle' style='text-align: center;'>
+                <a class='btn btn-adm' onclick="ajax_modal_sol(565352)"> <i class="fa-solid fa-info"></i> </a>
+                <a class='btn btn-adm' onclick="ajax_modal_just(565352,'V')"><i class="fa-solid fa-scroll"></i></a>
+            </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Concluído</td>
+            <td class='align-middle' style='text-align: center;'>835614</td>
+            <td class='align-middle' style='text-align: center;'>04/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>ALEXANDRE VICTOR VIEIRA DE MELO</td>
+            <td class='align-middle' style='text-align: center;'>
+                <a class='btn btn-adm' onclick="ajax_modal_sol(835614)"> <i class="fa-solid fa-info"></i> </a>
+                <a class='btn btn-adm' onclick="ajax_modal_just(835614,'V')"><i class="fa-solid fa-scroll"></i></a>
+            </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Concluído</td>
+            <td class='align-middle' style='text-align: center;'>835627</td>
+            <td class='align-middle' style='text-align: center;'>07/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>CAIO BECKER MOLINA ESCANDELL</td>
+            <td class='align-middle' style='text-align: center;'>HEITOR SCALABRINI SAMPAIO</td>
+            <td class='align-middle' style='text-align: center;'>
+                <a class='btn btn-adm' onclick="ajax_modal_sol(835627)"> <i class="fa-solid fa-info"></i> </a>
+                <a class='btn btn-adm' onclick="ajax_modal_just(835627,'V')"><i class="fa-solid fa-scroll"></i></a>
+            </td>
+
+        </tr>
+        
+        
+            
+        <tr>
+            <td class='align-middle' style='text-align: center;'>Concluído</td>
+            <td class='align-middle' style='text-align: center;'>835648</td>
+            <td class='align-middle' style='text-align: center;'>18/11/2022</td>
+            <td class='align-middle' style='text-align: center;'>LEONARDO DO PRADO GOMES</td>
+            <td class='align-middle' style='text-align: center;'>HEITOR SCALABRINI SAMPAIO</td>
+            <td class='align-middle' style='text-align: center;'>
+                <a class='btn btn-adm' onclick="call_chat(835648,'Concluído')"><i class="fa-solid fa-comment"></i></a>
+                <a class='btn btn-adm' onclick="ajax_modal_sol(835648)"> <i class="fa-solid fa-info"></i> </a>
+                <a class='btn btn-adm' onclick="ajax_modal_just(835648,'V')"><i class="fa-solid fa-scroll"></i></a>
+            </td>
+
+        </tr>      
+    </div>
+</table>
