@@ -100,6 +100,37 @@
 
     <div class="row">
 
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+
+            Unica vez:
+            <span class="espaco_pequeno"></span>
+            <span class="espaco_pequeno"></span>
+            <input onclick="controla_check_box('1')" type="checkbox" class="check_box" id="ckb_unica_vez">
+
+        </div>
+
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+            Mensalmente:
+            <span class="espaco_pequeno"></span>
+            <span class="espaco_pequeno"></span>
+            <input onclick="controla_check_box('2')" type="checkbox" class="check_box" id="ckb_mensalmente">
+        </div>
+
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+            Tempo Real:
+            <span class="espaco_pequeno"></span>
+            <span class="espaco_pequeno"></span>
+            <input onclick="controla_check_box('3')" type="checkbox" class="check_box" id="ckb_temporeal">
+        </div>
+
+    </div>
+
+    <div class="div_br"> </div>
+    <div class="div_br"> </div>
+
+
+    <div class="row">
+
         <div class="col-md-12">
 
             Anexos:
@@ -116,10 +147,74 @@
         
     </div>
 
-
-
-
 <script>
+
+ckb_unica_vez = '';
+ckb_mensalmente = '';
+ckb_temporeal = '';
+
+
+
+function controla_check_box(tp_check_box){
+
+    if(tp_check_box == '1'){
+
+        checkbox1 = document.getElementById('ckb_unica_vez');
+        checkbox2 = document.getElementById('ckb_mensalmente');
+        checkbox3 = document.getElementById('ckb_temporeal');
+        
+        if(checkbox1.checked){
+
+            ckb_unica_vez = 'true';
+            ckb_mensalmente = 'false';
+            ckb_temporeal = 'false';
+            
+            checkbox2.checked = false;
+            checkbox3.checked = false;
+
+        }
+
+    }
+
+    if(tp_check_box == '2'){
+
+        checkbox1 = document.getElementById('ckb_unica_vez');
+        checkbox2 = document.getElementById('ckb_mensalmente');
+        checkbox3 = document.getElementById('ckb_temporeal');
+
+        if(checkbox2.checked){
+
+            ckb_unica_vez = 'false';
+            ckb_mensalmente = 'true';
+            ckb_temporeal = 'false';
+
+            checkbox1.checked = false;
+            checkbox3.checked = false;
+
+        }
+
+    }
+
+    if(tp_check_box == '3'){
+
+        checkbox1 = document.getElementById('ckb_unica_vez');
+        checkbox2 = document.getElementById('ckb_mensalmente');
+        checkbox3 = document.getElementById('ckb_temporeal');
+
+        if(checkbox3.checked){
+
+            ckb_unica_vez = 'false';
+            ckb_mensalmente = 'false';
+            ckb_temporeal = 'true';
+
+            checkbox1.checked = false;
+            checkbox2.checked = false;
+
+        }
+
+    }
+
+}
 
 
 function ajax_abrir_os(){
@@ -128,6 +223,10 @@ function ajax_abrir_os(){
     var usuario_logado = '<?php echo $var_usuario ?>';
     var nome_usuario_logado = '<?php echo $row_usuario['NM_USUARIO'] ?>';
     var setor_usuario_logado = '<?php echo $row_setor['CD_SETOR'] ?>';
+
+    ckb_unica_vez;
+    ckb_mensalmente;
+    ckb_temporeal;
 
     var inpt_ramal = $("#inpt_ramal").val();
     var inpt_email = $("#inpt_email").val();
@@ -145,6 +244,9 @@ function ajax_abrir_os(){
     formData.append('usuariologado', usuario_logado);
     formData.append('nm_usuario_logado', nome_usuario_logado);
     formData.append('st_usuario_logado', setor_usuario_logado);
+    formData.append('ckb_unica_vez', ckb_unica_vez);
+    formData.append('ckb_mensalmente', ckb_mensalmente);
+    formData.append('ckb_temporeal', ckb_temporeal);
 
     // Adicionar os arquivos anexados ao objeto FormData
     for (var i = 0; i < fileInput.files.length; i++) {
@@ -173,6 +275,7 @@ function ajax_abrir_os(){
 
         }
     });
+
     
 }
 

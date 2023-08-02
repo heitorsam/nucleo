@@ -11,6 +11,11 @@
   $var_usuario_logado = $_POST['usuariologado'];
   $var_nome_usuario_logado = $_POST['nm_usuario_logado'];
   $st_usuario_logado = $_POST['st_usuario_logado'];
+  $ckb_unica_vez = $_POST['ckb_unica_vez'];
+  $ckb_mensalmente = $_POST['ckb_mensalmente'];
+  $ckb_temporeal = $_POST['ckb_temporeal'];
+  
+
   
   // Exibindo informações do usuário (remova essas linhas se não forem necessárias)
   //echo "Ramal: " . $var_inpt_ramal . "<br>";
@@ -59,18 +64,18 @@
   //INSERT NA TABELA DE OS
   $consulta_tb_os = "INSERT INTO dbamv.SOLICITACAO_OS 
                           SELECT $var_nextval AS CD_OS,
-                          TO_DATE(SYSDATE, 'dd/mm/yy hh24:mi:ss') AS DT_PEDIDO,
+                          TO_DATE(TO_CHAR(SYSDATE, 'DD/MM/YYYY HH24:MI:SS'), 'DD/MM/YYYY HH24:MI:SS') AS DT_PEDIDO,
                           '$var_inpt_descricao' as DS_SERVICO, 
                           '$var_inpt_motivo' as DS_OBSERVACAO,
                           NULL AS DT_EXECUCAO,
                           NULL as DT_PREV_EXEC,
-                          '$var_nome_usuario_logado' as NM_SOLICITANTE,
-                          'A' as TP_SITUACAO,
+                          trim('$var_usuario_logado') as NM_SOLICITANTE,
+                          'S' as TP_SITUACAO,
                           $st_usuario_logado as CD_SETOR, 
                           1 as CD_MULTI_EMPRESA,
                           NULL as CD_ESPEC,
                           87 as CD_TIPO_OS, 
-                          '$var_usuario_logado' as NM_USUARIO,
+                          trim('$var_usuario_logado') as NM_USUARIO,
                           SYSDATE as DT_ULTIMA_ATUALIZACAO, 
                           NULL as CD_LOCALIDADE, 
                           NULL as TP_LOCAL,
@@ -91,19 +96,19 @@
                           'N' as N_PACIENTE,
                           NULL as CD_LEITO,
                           NULL as CD_MOV_INT,
-                          NULL as DS_EMAIL_ALTERNATIVO,
-                          NULL as DS_RAMAL,
+                          '$var_inpt_email' as DS_EMAIL_ALTERNATIVO,
+                          '$var_inpt_ramal' as DS_RAMAL,
                           NULL as CD_USUARIO_REPROVA_OS,
                           NULL DT_USUARIO_REPROVA_OS,
                           NULL DT_ENTREGA, 
-                          'M' as TP_PRIORIDADE,
+                          'E' as TP_PRIORIDADE,
                           NULL as QT_PRONTUARIOS,
                           'N' as SN_RECEBIDA,
                           NULL as CD_RESPONSAVEL,
                           'N' as SN_ETIQUETA_IMPRESSA,
                           'N' as SN_EMAIL_ENVIADO,
                           NULL as CD_PROGRAMACAO_PLANO,
-                          'P' as TP_CLASSIFICACAO,
+                          'C' as TP_CLASSIFICACAO,
                           NULL as DS_SERVICO_GERAL,
                           NULL as CD_USUARIO_CADASTRO_SOL_SERV,
                           NULL DT_USUARIO_CADASTRO_SOL_SERV,
@@ -151,6 +156,9 @@
                                       ESTIMATIVA_ENTREGA, 
                                       RAMAL_SOLICITANTE,
                                       EMAIL_SOLICITANTE,
+                                      SN_CKB_UNICA_VEZ,
+                                      SN_CKB_MENSALMENTE,
+                                      SN_CKB_TEMPOREAL,
                                       CD_USUARIO_CADASTRO,
                                       HR_CADASTRO, 
                                       CD_USUARIO_ULT_ALT,
@@ -164,6 +172,9 @@
                                       NULL, 
                                       '$var_inpt_ramal',
                                       '$var_inpt_email',
+                                      '$ckb_unica_vez',
+                                      '$ckb_mensalmente',
+                                      '$ckb_temporeal',
                                       '$var_usuario_logado', 
                                       SYSDATE, 
                                       NULL,
@@ -266,7 +277,5 @@ for ($i = 0; $i < $num_files; $i++) {
 
     }
 }
-
-
 
 ?>

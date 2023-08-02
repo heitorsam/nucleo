@@ -32,36 +32,66 @@
     <a href="dashboard.php" class="botao_home btn-adm" type="submit"><i class="fa-solid fa-chart-column"></i> Dashboard</a>
     <span class="espaco_pequeno"></span>
 
+    <!--BLOCO CHAMADOS SOLICITADOS PELO USUARIO-->
     <div class="div_br"> </div> 
-    <h11><i class="fa-brands fa-telegram"></i> Solicitados</h11>
+    <div class="div_br"> </div> 
+    <h11><i class="fa-brands fa-telegram"></i> Solicitações Realizadas</h11>
+    
+    <div id="lista_solic_usuario"></div>
 
-    <?php include 'funcoes/solicitacao/ajax_lista_chamados_usuario.php'; ?>
 
-    <div id="lista_chamados"></div>
+    <!-- //FIM DO BLOCO CHAMADOS SOLICITADOS PELO USUARIO// -->
 
-
-    <!--MODAL UNIVERSAL-->
-    <div class="modal fade" id="modal_universal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="modal_detalhes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" id="div_modal">
-                
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalhes da Solicitacao</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div id="detalhes_solicitacao"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
             </div>
+
         </div>
     </div>
-
-    <div class="modal fade" id="modal_just" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" id="div_just">
-                
-            </div>
-        </div>
-    </div>
-
-    <div class="div_br"> </div>
-    <div class="div_br"> </div>
-    <div class="div_br"> </div>  
 
     <script>
+
+        //BLOCO NOVO PROJETO
+        window.onload = function() {
+
+            ajax_exibe_solicitacoes_usuario();
+
+        };
+
+        function ajax_exibe_solicitacoes_usuario(){
+
+            $('#lista_solic_usuario').load('funcoes/solicitacao/ajax_exibe_solicitacoes_usuario_logado.php')
+
+        }
+
+        function ajax_modal_exibe_detalhes_adm(cd_solic, cd_os_mv){
+
+            $('#modal_detalhes').modal('show')
+            $('#detalhes_solicitacao').load('funcoes/solicitacao/ajax_modal_detalhes_solicitacao.php?os='+cd_os_mv+'&solicitacao='+cd_solic)
+            
+        }
+
+        ////////////////////////////////////////////
+
+
+
 
         $(document).ready(function() {
             console.log('sai do console curioso')

@@ -29,7 +29,14 @@
 																		FROM dbasgu.PAPEL_USUARIOS puia
 																		WHERE puia.CD_PAPEL = 477) THEN 'S' --PAPEL GLOBAL DE ACESSO
 													ELSE 'N'
-												END SN_USU_GLOBAL
+												END SN_USU_GLOBAL,
+												CASE
+													WHEN :usuario IN (SELECT DISTINCT puia.CD_USUARIO
+																		FROM dbasgu.PAPEL_USUARIOS puia
+																		WHERE puia.CD_PAPEL = 478) THEN 'S' --PAPEL GLOBAL DE ACESSO ADM
+													ELSE 'N'
+												END SN_USU_ADM
+
 
 												FROM DUAL");																															
 												
