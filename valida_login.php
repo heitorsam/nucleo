@@ -58,6 +58,7 @@
 				$_SESSION['usuarioLogin'] = $usuario;
 				$_SESSION['usuarioNome'] = $resultado[1];
 				$_SESSION['SN_USU_GLOBAL'] = $resultado[2];
+				$_SESSION['SN_USU_ADM'] = $resultado[3];
 
 				header("Location: $pag_apos");	
 					

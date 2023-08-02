@@ -5,8 +5,10 @@
     session_start();
 
     $usuario_logado = $_SESSION['usuarioLogin'];
+    $usu_global = $_SESSION['SN_USU_GLOBAL'];
+    $usu_adm = $_SESSION['SN_USU_ADM'];
 
-    $consulta_solicitado = "SELECT CASE
+    echo $consulta_solicitado = "SELECT CASE
                                 WHEN sol.CD_RESPONSAVEL IS NULL THEN 'Solicitado'
                                 ELSE 'Recebido'
                                 END AS TP_STATUS_SOLICITACAO,

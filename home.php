@@ -9,6 +9,8 @@
     $date = date('Y-m', time());
 
     $usu_login_mv = $_SESSION['usuarioLogin'];
+    $usu_global = $_SESSION['SN_USU_GLOBAL'];
+    $usu_adm = $_SESSION['SN_USU_ADM'];
 ?>
 
 <div class="div_br"> </div>
@@ -22,15 +24,31 @@
 
 <h11><i class="fa-solid fa-globe efeito-zoom"></i> Nucleo de Informações<a style="color:black" href="http://localhost:8080/portal_projetos/portfolio.php"></a></h11>
 
-    <div class="div_br"> </div>
-    <a href="solicitacao.php" class="botao_home btn-primary" type="submit"><i class="fa-solid fa-file-circle-plus"></i> Solicitação</a>
-    <span class="espaco_pequeno"></span>
-    
-    <a href="responsaveis.php" class="botao_home btn-adm" type="submit"><i class="fa-solid fa-users"></i> Responsáveis</a>
-    <span class="espaco_pequeno"></span>
-    
-    <a href="dashboard.php" class="botao_home btn-adm" type="submit"><i class="fa-solid fa-chart-column"></i> Dashboard</a>
-    <span class="espaco_pequeno"></span>
+    <?php
+    if($usu_global == 'S'){
+    ?>
+        <div class="div_br"> </div>
+        <a href="solicitacao.php" class="botao_home btn-primary" type="submit"><i class="fa-solid fa-file-circle-plus"></i> Solicitação</a>
+        <span class="espaco_pequeno"></span>
+
+    <?php  
+    }
+    ?>
+
+    <?php
+    if($usu_adm == 'S'){
+    ?>
+        
+        <a href="responsaveis.php" class="botao_home btn-adm" type="submit"><i class="fa-solid fa-users"></i> Responsáveis</a>
+        <span class="espaco_pequeno"></span>
+        
+        <a href="dashboard.php" class="botao_home btn-adm" type="submit"><i class="fa-solid fa-chart-column"></i> Dashboard</a>
+        <span class="espaco_pequeno"></span>
+
+    <?php  
+    }
+    ?>
+
 
     <!--BLOCO CHAMADOS SOLICITADOS PELO USUARIO-->
     <div class="div_br"> </div> 
