@@ -19,7 +19,8 @@
 ?>
 <div class="div_br"> </div>
 <div class="div_br"> </div>
-<h11><i class="fa-solid fa-laptop efeito-zoom"></i> Portal Projeto<a style="color:black" href="http://localhost:8080/portal_projetos/portfolio.php">s</a></h11>
+
+<h11><i class="fa-solid fa-globe efeito-zoom"></i> Nucleo de Informações<a style="color:black" href="http://localhost:8080/portal_projetos/portfolio.php"></a></h11>
 
     <div class="div_br"> </div>
     <a href="solicitacao.php" class="botao_home btn-primary" type="submit"><i class="fa-solid fa-file-circle-plus"></i> Solicitação</a>
@@ -32,8 +33,7 @@
     <span class="espaco_pequeno"></span>
 
     <div class="div_br"> </div> 
-    <div class="div_br"> </div>
-    <div class="div_br"> </div>
+    <h11><i class="fa-brands fa-telegram"></i> Solicitados</h11>
 
     <?php include 'funcoes/solicitacao/ajax_lista_chamados_usuario.php'; ?>
 
@@ -189,13 +189,9 @@
                     }
                 })
             }else{
+
                 alert('Informe uma justificativa!')
             }
-        }
-
-        function ajax_modal_avaliacao(os,qtd){
-            $('#div_modal').load('funcoes/avaliacao/ajax_modal_avaliacao.php?cd_os='+os+'&qtd='+qtd)
-            $('#modal_universal').modal('show')
         }
 
         
@@ -203,7 +199,9 @@
 
 
     <?php
+
         //RODAPE
         include 'rodape.php';
+
     ?>
 
