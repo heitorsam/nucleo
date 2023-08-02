@@ -66,25 +66,51 @@
 
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detalhes da Solicitacao</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div class="fnd_azul" style="width: 100%; display: flex; justify-content: space-between;">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalhes da Solicitacao</h5>
+                        <div>
+                            <i id="iconeBotao" onclick="ajax_volta_pagina_fecha_pagina()" class="fa-solid fa-xmark" style="cursor: pointer;"></i>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-body">
 
                     <div id="detalhes_solicitacao"></div>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
+                <?php
+
+                    if($usu_adm == 'S' && $usu_global == 'S'){
+                
+                ?>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                        </div>
+                <?php
+
+                    }elseif($usu_adm == 'N' && $usu_global == 'S'){
+
+                ?>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
+                <?php
+
+                    }
+
+                ?>
+
             </div>
 
         </div>
     </div>
 
+
     <script>
+
+        global_solic = '';
+        global_os_mv = '';
 
         //BLOCO NOVO PROJETO
         window.onload = function() {
@@ -101,10 +127,49 @@
 
         function ajax_modal_exibe_detalhes_adm(cd_solic, cd_os_mv){
 
+            global_solic = cd_solic;
+            global_os_mv = cd_os_mv;
+
             $('#modal_detalhes').modal('show')
             $('#detalhes_solicitacao').load('funcoes/solicitacao/ajax_modal_detalhes_solicitacao.php?os='+cd_os_mv+'&solicitacao='+cd_solic)
             
         }
+
+        function ajax_volta_pagina_fecha_pagina(){
+
+            global_solic;
+            global_os_mv;
+
+            var iconeBotao = document.getElementById("iconeBotao");
+            if (iconeBotao.classList.contains("fa-reply")){
+
+                iconeBotao.classList.remove("fa-reply");
+                iconeBotao.classList.add("fa-xmark");
+                $('#detalhes_solicitacao').load('funcoes/solicitacao/ajax_modal_detalhes_solicitacao.php?os='+global_os_mv+'&solicitacao='+global_solic)
+
+            }else{
+
+                $('#modal_detalhes').modal('hide')
+
+            }
+
+
+        }
+
+        function ajax_chama_modal_galeria(os_mv){
+
+            var iconeBotao = document.getElementById("iconeBotao");
+
+            if (iconeBotao.classList.contains("fa-xmark")) {
+                iconeBotao.classList.remove("fa-xmark");
+                iconeBotao.classList.add("fa-reply");
+
+                $('#detalhes_solicitacao').load('funcoes/solicitacao/ajax_modal_anexo.php?os_mv='+os_mv)
+                
+            }
+
+        }
+
 
         ////////////////////////////////////////////
 

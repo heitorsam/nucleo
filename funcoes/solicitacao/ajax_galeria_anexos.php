@@ -2,9 +2,9 @@
 
     include '../../conexao.php';
 
-    $cd_solicitacao = $_GET['cd_solicitacao'];
+    $os_mv = $_GET['os_mv'];
 
-    $cons_qtd = "SELECT COUNT(*) AS QTD from anexos anx WHERE anx.cd_solicitacao = $cd_solicitacao";
+    $cons_qtd = "SELECT COUNT(*) AS QTD from nucleoinfo.ANEXOS anx WHERE anx.CD_OS_MV = $os_mv";
     $result_qtd = oci_parse($conn_ora, $cons_qtd);
 
     oci_execute($result_qtd);
@@ -14,14 +14,14 @@
     $qtd = $row_qtd['QTD'];
 
     $cons_anexo = "SELECT anx.documento, anx.cd_anexos, anx.extensao
-                        FROM portal_projetos.anexos anx
-                    WHERE anx.cd_solicitacao = $cd_solicitacao";
+                        FROM nucleoinfo.ANEXOS anx
+                    WHERE anx.CD_OS_MV = $os_mv";
 
     $result_anexo = oci_parse($conn_ora, $cons_anexo);
 
     oci_execute($result_anexo);
 
-        $p = 0;
+    $p = 0;
     if($qtd > 0){
         while($row_anexo = oci_fetch_array($result_anexo)){
             $img = $row_anexo['DOCUMENTO']->load();
@@ -35,6 +35,7 @@
             $p++;
         }
         $ext = '.jpeg';
+        
         include 'galeria.php';
     }
 ?>

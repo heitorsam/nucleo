@@ -76,21 +76,16 @@
 
 <div id="div_lista"></div>
 
-
-<?php 
-
-    include 'rodape.php';
-    include 'funcoes/js_editar_campos.php';
-?>
-
 <script>
 
     $(document).ready(function() {
-        console.log('sai do console curioso')
+
         $('#div_lista').load('funcoes/responsaveis/ajax_lista_responsaveis.php')
+        
     });
 
     function ajax_cad_responsavel(){
+
         usuario = document.getElementById('input')
         email = document.getElementById('inpt_email')
         funcao = document.getElementById('slt_func')
@@ -151,6 +146,7 @@
     }
 
     function ajax_apagar_responsavel(cd_usuario){
+
         $.ajax({
             url: "funcoes/responsaveis/ajax_apagar_responsavel.php",
             type: "POST",
@@ -169,4 +165,13 @@
             
         })
     }
+
 </script>
+
+
+<?php 
+
+    include 'rodape.php';
+    include 'funcoes/js_editar_campos.php';
+?>
+

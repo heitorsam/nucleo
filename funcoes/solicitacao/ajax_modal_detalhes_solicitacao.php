@@ -1,11 +1,14 @@
 <?php
 
+    session_start();
+
     //INICIANDO CONEXÃO
     include '../../conexao.php';
 
     //RECEBENDO VARIAVEIS PARA REALIZAR A CONSULTA
     $var_solicitacao = $_GET['solicitacao'];
     $var_os = $_GET['os'];
+    $var_adm = $_SESSION['SN_USU_ADM'];
 
     //INICIANDO A CONSULTA 
     $consulta_solicitado = "SELECT CASE
@@ -53,3 +56,34 @@
         <textarea class="textarea" readonly style="text-align: left !important;"><?php echo $row['DS_OBSERVACAO']; ?></textarea>
     </div>
 </div>
+
+<div class="div_br"> </div>
+
+<div class="row">
+
+    <div class="col-md-12" style="text-align: center;">
+
+        <button class="btn btn-primary" onclick="ajax_chama_modal_galeria(<?php echo $row['CD_OS_MV']; ?>)"><i class="fa-regular fa-folder-open"></i> Anexos</button>
+
+    </div>
+
+</div>
+
+<div class="div_br"> </div>
+
+<?php
+
+if($var_adm == 'S'){
+
+?>
+
+    <div class="fnd_azul"><i class="fa-solid fa-globe efeito-zoom"></i> <b>Nucleo de Informações<b></div>
+
+
+    
+
+<?php
+
+}
+
+?>

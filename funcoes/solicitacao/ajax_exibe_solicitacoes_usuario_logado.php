@@ -8,7 +8,7 @@
     $usu_global = $_SESSION['SN_USU_GLOBAL'];
     $usu_adm = $_SESSION['SN_USU_ADM'];
 
-    echo $consulta_solicitado = "SELECT CASE
+    $consulta_solicitado = "SELECT CASE
                                 WHEN sol.CD_RESPONSAVEL IS NULL THEN 'Solicitado'
                                 ELSE 'Recebido'
                                 END AS TP_STATUS_SOLICITACAO,
@@ -24,6 +24,13 @@
                             FROM nucleoinfo.SOLICITACAO sol
                             INNER JOIN dbamv.SOLICITACAO_OS solmv
                             ON solmv.CD_OS = sol.CD_OS_MV";
+
+                            if($usu_adm == 'N'){
+
+                                $consulta_solicitado .= " WHERE sol.CD_USUARIO_CADASTRO = '$usuario_logado'";
+
+                            }
+
     $res_solicitados = oci_parse($conn_ora, $consulta_solicitado);
                        oci_execute($res_solicitados);
 
@@ -80,11 +87,25 @@
 
             }
             
-            echo '<td class="align-middle" style=" cursor: pointer; text-align: center; border: solid 2px #3185c1; padding: 10px !important; !important; color: black !important;">
+            if($usu_global == 'S' && $usu_adm == 'N'){
 
-                <button class="btn btn-primary" onclick="ajax_modal_exibe_detalhes_adm('.$row['CD_SOLICITACAO'].','.$row['CD_OS_MV'].')"><i class="fa-solid fa-circle-info"></i></button>
+                echo '<td class="align-middle" style=" cursor: pointer; text-align: center; border: solid 2px #3185c1; padding: 10px !important; !important; color: black !important;">
 
-            </td>';
+                        <button class="btn btn-primary" onclick="ajax_modal_exibe_detalhes_adm('.$row['CD_SOLICITACAO'].','.$row['CD_OS_MV'].')"><i class="fa-solid fa-circle-info"></i></button>
+
+                    </td>';
+
+            }elseif ($usu_global == 'S' && $usu_adm == 'S') {
+
+                
+                echo '<td class="align-middle" style=" cursor: pointer; text-align: center; border: solid 2px #3185c1; padding: 10px !important; !important; color: black !important;">
+
+                        <button class="btn btn-primary" onclick="ajax_modal_exibe_detalhes_adm('.$row['CD_SOLICITACAO'].','.$row['CD_OS_MV'].')"><i class="fa-solid fa-circle-check"></i></button>
+
+                    </td>'; 
+
+            }
+
 
         }
         ?>
