@@ -77,8 +77,80 @@ if($var_adm == 'S'){
 
 ?>
 
-    <div class="fnd_azul"><i class="fa-solid fa-globe efeito-zoom"></i> <b>Nucleo de Informações<b></div>
+    <div class="fnd_azul"><i class="fa-solid fa-globe efeito-zoom"></i> <b>Nucleo de Informações</b></div>
 
+    <div class="div_br"> </div>
+
+    <div class="row">
+
+        <div class="col-md-3 d-flex align-items-center justify-content-center">
+
+            Query:
+            <span class="espaco_pequeno"></span>
+            <span class="espaco_pequeno"></span>
+            <input onclick="controla_check_box_('1')" type="checkbox" class="check_box" id="ckb_query">
+
+        </div>
+
+        <div class="col-md-3 d-flex align-items-center justify-content-center">
+            Painel:
+            <span class="espaco_pequeno"></span>
+            <span class="espaco_pequeno"></span>
+            <input onclick="controla_check_box('2')" type="checkbox" class="check_box" id="ckb_painel">
+        </div>
+
+        <div class="col-md-3 d-flex align-items-center justify-content-center">
+            Relatorio:
+            <span class="espaco_pequeno"></span>
+            <span class="espaco_pequeno"></span>
+            <input onclick="controla_check_box('3')" type="checkbox" class="check_box" id="ckb_relatorio">
+        </div>
+
+        <div class="col-md-3 d-flex align-items-center justify-content-center">
+            Desenvolvimento:
+            <span class="espaco_pequeno"></span>
+            <span class="espaco_pequeno"></span>
+            <input onclick="controla_check_box('4')" type="checkbox" class="check_box" id="ckb_desenvolvimento">
+        </div>
+
+    </div>
+
+    <div class="div_br"> </div>
+    
+    <div class="row">
+
+        <div class="col-md-3">
+
+            Previsão de Entrega:
+            <input type="date" class="form form-control" id="data_prevista">
+
+        </div>
+
+        <div class="col-md-3">
+
+            Responsavel:
+            <select class="form form-control" id="prestador_responsavel">
+
+                <option value="All">Selecione</option>
+                
+            
+            <select>
+
+        </div>
+
+
+    </div>
+
+    <div class="div_br"> </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            Considerações
+            <textarea style="background-color: white" class="textarea"  id="considerações" rows="4"></textarea>
+        </div>
+
+    </div>
 
     
 

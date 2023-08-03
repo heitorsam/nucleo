@@ -115,19 +115,22 @@
                                 funcao: funcao.value
                                 },
                             cache: false,
-                            success: function(dataResult){   
+                            success: function(dataResult){  
+
                                 usuario.value = ''
                                 email.value = ''
                                 funcao.value = ''
                                 $('#div_lista').load('funcoes/responsaveis/ajax_lista_responsaveis.php')
                                 
                                 if(dataResult == ''){
+
                                     //MENSAGEM            
                                     var_ds_msg = 'Responsável%20cadastrado%20com%20sucesso!';
                                     var_tp_msg = 'alert-success';
                                     //var_tp_msg = 'alert-danger';
                                     //var_tp_msg = 'alert-primary';
                                     $('#mensagem').load('funcoes/ajax_mensagem_acoes.php?ds_msg='+var_ds_msg+'&tp_msg='+var_tp_msg); 
+                                
                                 }else{
                                     //MENSAGEM
                                     var_ds_msg = 'Ocorreu%20um%20erro!';

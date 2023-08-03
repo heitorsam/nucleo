@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="img/logo/icone_santa_casa_sjc_colorido.png">
-    <title>Portal Projetos</title>
+    <title>Nucleo de Informações</title>
     <!--SESSION-->
     <?php 
         session_start();
@@ -35,7 +35,7 @@
                 <div class="row justify-content-center">
                     <div class="col-10" style="border-bottom: 1px solid #e7e7e7; border-top-left-radius: 5px; border-top-right-radius: 5px;">
                         
-                        <h14>Portal Projetos</h14>
+                        <h14>Nucleo de Informações</h14>
                         
 
                     </div>

@@ -107,12 +107,115 @@
     </div>
 
 
-    <script>
+<script>
 
-        global_solic = '';
-        global_os_mv = '';
+//BLOCO NOVO PROJETO
 
-        //BLOCO NOVO PROJETO
+    global_solic = '';
+    global_os_mv = '';
+
+    ckb_query = '';
+    ckb_painel = '';
+    ckb_relatorio = '';
+    ckb_desenvolvimento = '';
+
+
+
+    function controla_check_box(tp_check_box){
+
+        if(tp_check_box == '1'){
+
+            checkbox1 = document.getElementById('ckb_query');
+            checkbox2 = document.getElementById('ckb_painel');
+            checkbox3 = document.getElementById('ckb_relatorio');
+            checkbox4 = document.getElementById('ckb_desenvolvimento');
+
+            if(checkbox1.checked){
+
+                ckb_query = 'true';
+                ckb_painel = 'false';
+                ckb_relatorio = 'false';
+                ckb_desenvolvimento = 'false';
+                
+                checkbox2.checked = false;
+                checkbox3.checked = false;
+                checkbox4.checked = false;
+
+            }
+
+        }
+
+        if(tp_check_box == '2'){
+
+            checkbox1 = document.getElementById('ckb_query');
+            checkbox2 = document.getElementById('ckb_painel');
+            checkbox3 = document.getElementById('ckb_relatorio');
+            checkbox4 = document.getElementById('ckb_desenvolvimento');
+
+            if(checkbox2.checked){
+
+                ckb_query = 'false';
+                ckb_painel = 'true';
+                ckb_relatorio = 'false';
+                ckb_desenvolvimento = 'false';
+
+                checkbox1.checked = false;
+                checkbox3.checked = false;
+                checkbox4.checked = false;
+
+            }
+
+        }
+
+        if(tp_check_box == '3'){
+
+            checkbox1 = document.getElementById('ckb_query');
+            checkbox2 = document.getElementById('ckb_painel');
+            checkbox3 = document.getElementById('ckb_relatorio');
+            checkbox4 = document.getElementById('ckb_desenvolvimento');
+
+            if(checkbox3.checked){
+
+                ckb_query = 'false';
+                ckb_painel = 'false';
+                ckb_relatorio = 'true';
+                ckb_desenvolvimento = 'false';
+
+                checkbox1.checked = false;
+                checkbox2.checked = false;
+                checkbox4.checked = false;
+
+            }
+
+        }
+
+        
+        if(tp_check_box == '4'){
+
+            checkbox1 = document.getElementById('ckb_query');
+            checkbox2 = document.getElementById('ckb_painel');
+            checkbox3 = document.getElementById('ckb_relatorio');
+            checkbox4 = document.getElementById('ckb_desenvolvimento');
+
+            if(checkbox3.checked){
+
+                ckb_query = 'false';
+                ckb_painel = 'false';
+                ckb_relatorio = 'false';
+                ckb_desenvolvimento = 'true';
+
+                checkbox1.checked = false;
+                checkbox2.checked = false;
+                checkbox3.checked = false;
+
+            }
+
+        }
+
+
+    }
+
+        
         window.onload = function() {
 
             ajax_exibe_solicitacoes_usuario();
