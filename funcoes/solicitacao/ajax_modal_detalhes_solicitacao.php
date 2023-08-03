@@ -158,7 +158,7 @@ if($var_adm == 'S'){
         <div class="col-md-3">
 
             Validado Por:
-            <select class="form form-control" id="prestador_responsavel" disabled>
+            <select class="form form-control" id="prestador_validador" disabled>
 
                 <option value="All">Selecione</option>
                 

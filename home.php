@@ -244,6 +244,7 @@
         
         window.onload = function() {
 
+            //CHAMANDO ASSIM QUE CARREGA A PAGINA
             ajax_exibe_solicitacoes_usuario();
 
         };
@@ -287,6 +288,7 @@
 
         function ajax_chama_modal_galeria(os_mv){
 
+            //COLETANDO O BOTÃO
             var iconeBotao = document.getElementById("iconeBotao");
 
             if (iconeBotao.classList.contains("fa-xmark")) {
@@ -299,13 +301,46 @@
 
         }
 
-        ajax_recebe_solicitacoes(){
+        
+
+        //CONTINUAR RECEBIMENTO DE SOLICITACOES
+        function ajax_recebe_solicitacoes(){
+
+            //RECEBENDO VALORES DOS INPUTS
+            prestador_responsavel = document.getElementById('prestador_responsavel').value;
+            data_prevista = document.getElementById('data_prevista').value;
+            consideracoes = document.getElementById('considerações').value;
+            ckb_query;
+            ckb_painel;
+            ckb_relatorio;
+            ckb_desenvolvimento;
+
+            //INICIANDO AJAX
+
+            $.ajax({
+
+                url: "funcoes/responsaveis/ajax_cad_responsavel.php",
+                type: "POST",
+                data: {
+
+                    usuario: usuario.value,
+                    email: email.value
+
+                    },
+                cache: false,
+                success: function(dataResult){  
 
 
 
 
-            
+                },
+                
+            })
+
+
         }
+
+
 
 
         ////////////////////////////////////////////
