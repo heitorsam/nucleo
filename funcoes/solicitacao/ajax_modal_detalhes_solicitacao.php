@@ -33,6 +33,13 @@
                             oci_execute($res_solicitados); 
                             $row = oci_fetch_array($res_solicitados);
 
+    $responsavel_os = "SELECT resp.CD_USUARIO_MV,
+                            (SELECT usu.NM_USUARIO FROM dbasgu.USUARIOS usu WHERE usu.CD_USUARIO = resp.CD_USUARIO_MV) AS NM_RESPONSAVEL
+                       FROM nucleoinfo.RESPONSAVEL resp";
+
+    $res_responsavel_os= oci_parse($conn_ora, $responsavel_os);
+    oci_execute($res_responsavel_os); 
+
 ?>
 
 <div class="row">
@@ -132,6 +139,16 @@ if($var_adm == 'S'){
             <select class="form form-control" id="prestador_responsavel">
 
                 <option value="All">Selecione</option>
+                
+                <?php
+
+                    while($row = oci_fetch_array($res_responsavel_os)){
+
+                        echo '<option value="' . $row['CD_USUARIO_MV'] . '">' . $row['NM_RESPONSAVEL']  . '</option>';
+                        
+                    }
+
+                ?>
                 
             
             <select>

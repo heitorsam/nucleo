@@ -24,8 +24,9 @@
 
     $consulta_insert = "INSERT INTO nucleoinfo.responsavel 
                                     (
-                                    CD_RESPONSAVEL,     
+                                    CD_RESPONSAVEL,   
                                     CD_USUARIO_MV,  
+                                    CD_RESPONSAVEL_MV,  
                                     EMAIL, 
                                     CD_USUARIO_CADASTRO,
                                     HR_CADASTRO,
@@ -33,11 +34,13 @@
                                     HR_ULT_ALT)  
                                 VALUES(
                                     nucleoinfo.SEQ_CD_RESPONSAVEL.nextval,
+
+                                        '$usuario',
                                         '$responsavel',
                                         '$email',
-                                        '$usuario',
-                                        sysdate,
                                         '$var_usuario',
+                                        sysdate,
+                                        NULL,
                                         sysdate)";
    
     $resultado_insert = oci_parse($conn_ora,$consulta_insert);

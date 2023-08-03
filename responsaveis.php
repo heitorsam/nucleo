@@ -151,6 +151,7 @@
                 }
             }
         }
+        
     }
 
     function ajax_apagar_responsavel(cd_usuario){
