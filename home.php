@@ -49,20 +49,41 @@
     }
     ?>
 
+    <?php
 
-    <!--BLOCO CHAMADOS SOLICITADOS PELO USUARIO-->
-    <div class="div_br"> </div> 
-    <div class="div_br"> </div> 
-    <h11><i class="fa-brands fa-telegram"></i> Solicitações Realizadas</h11>
-    <div id="lista_solic_usuario"></div>
+    if($usu_adm == 'S' || $usu_global == 'S'){
+
+    ?>
+
+        <!--BLOCO CHAMADOS SOLICITADOS PELO USUARIO-->
+        <div class="div_br"> </div> 
+        <div class="div_br"> </div> 
+        <h11><i class="fa-brands fa-telegram"></i> Solicitações Realizadas</h11>
+        <div id="lista_solic_usuario"></div>
 
 
-    <!-- //FIM DO BLOCO CHAMADOS SOLICITADOS PELO USUARIO// -->
+    <?php  
+    }
+    ?>
 
-    <!--BLOCO CHAMADOS RECEBIDOS PELO RESPONSAVEL-->
-    <div class="div_br"> </div> 
-    <div class="div_br"> </div> 
-    <h11><i class="fa-brands fa-telegram"></i> Solicitações Recebidas</h11>
+
+    <?php
+
+    if($usu_adm == 'S'){
+
+    ?>
+
+        <!-- //FIM DO BLOCO CHAMADOS SOLICITADOS PELO USUARIO// -->
+
+        <!--BLOCO CHAMADOS RECEBIDOS PELO RESPONSAVEL-->
+        <div class="div_br"> </div> 
+        <div class="div_br"> </div> 
+        <h11><i class="fa-brands fa-telegram"></i> Solicitações Recebidas</h11>
+
+    <?php  
+    }
+    ?>
+
 
 
     <!-- //FIM DO BLOCO CHAMADOS RECEBIDOS PELO RESPONSAVEL// -->
@@ -92,7 +113,7 @@
                 
                 ?>
                         <div class="modal-footer">
-                            <button type="button"  class="btn btn-primary" data-dismiss="modal">Receber</button>
+                            <button type="button" onclick="ajax_recebe_solicitacoes()" class="btn btn-primary" data-dismiss="modal">Receber</button>
                         </div>
                 <?php
 
@@ -278,143 +299,16 @@
 
         }
 
+        ajax_recebe_solicitacoes(){
+
+
+
+
+            
+        }
+
 
         ////////////////////////////////////////////
-
-
-
-
-        $(document).ready(function() {
-            console.log('sai do console curioso')
-            $('#lista_chamados').load('funcoes/solicitacao/ajax_lista_chamados_concluido.php?data=<?php echo $date ?>')
-            
-        })
-
-        function ajax_filtro_mes(data){
-            $('#lista_chamados').load('funcoes/solicitacao/ajax_lista_chamados_concluido.php?data='+ data)
-
-        }
-
-        function ajax_modal_sol(os){
-            
-            $('#div_modal').load('funcoes/solicitacao/ajax_modal_soli.php?cd_os='+os)
-            $('#modal_universal').modal('show')
-        }
-
-        function ajax_modal_anexos(os){
-            $('#div_modal').load('funcoes/solicitacao/ajax_modal_anexo.php?cd_os='+os)
-        }
-
-        function ajax_editar_solicitacao(cd_sol, tp_just){
-            funcionario = document.getElementById('slt_func')
-            prioridade = document.getElementById('slt_prioridade')
-            tipo = document.getElementById('slt_tipo')
-            previsao = document.getElementById('inpt_previsao')
-            data = {}
-            data_just = {}
-            data['cd_sol'] = cd_sol
-            data_just['os'] = cd_sol
-            if(funcionario.value == '' && tp_just != 'R'){
-                alert('Escolha um responsavel!')
-                funcionario.focus()
-            }else{
-                if(previsao.value == '' && tp_just != 'R'){
-                    alert('Informe uma estimativa de entrega!')
-                    previsao.focus()
-                }else{
-                    if(funcionario.value != 'caio_esteve_aqui' && funcionario.value != '' && tp_just != 'R'){
-                        
-                        data['func'] = funcionario.value
-                    }
-                    if(prioridade.value != '' && tp_just != 'R'){
-                        
-                        data['prioridade'] = prioridade.value
-                    }
-                    if(previsao.value != '' && tp_just != 'R'){
-                        
-                        data['estimativa'] = previsao.value
-                    }
-                    if(tipo.value != '' && tp_just != 'R'){
-                        data['tipo'] = tipo.value
-                    }
-                    if(tp_just != '' ){
-                        data_just['tp_just'] = tp_just
-                    }
-                    txt_just = document.getElementById('txt_just')
-                    
-                    if(tp_just != 'A'){
-                        
-                        if(txt_just.value != ''){
-                            $.ajax({
-                                url:"funcoes/solicitacao/ajax_editar_sol.php",
-                                type: "POST",
-                                data: data,
-                                cache: false,
-                                success: function(dataResult){                    
-                                    console.log(dataResult)
-                                    data_just['txt_just'] = txt_just.value
-                                    $.ajax({
-                                        url:"funcoes/justificativa/ajax_cad_just.php",
-                                        type: "POST",
-                                        data: data_just,
-                                        cache: false,
-                                        success: function(dataResult){                    
-                                            console.log(dataResult)
-                                            location.reload();
-                                        }
-                                    })
-                                        
-                                }
-                            })
-                            
-                        }else{
-                            alert('Informe uma justificativa!')
-                        }
-                    }else{
-                        $.ajax({
-                            url:"funcoes/solicitacao/ajax_editar_sol.php",
-                            type: "POST",
-                            data: data,
-                            cache: false,
-                            success: function(dataResult){                    
-                                console.log(dataResult)
-                                console.log('aceito')
-                                location.reload();
-                            } 
-                        })
-                    }   
-                }
-            }
-        }
-
-        function ajax_modal_just(os,tp){
-            $('#div_just').load('funcoes/justificativa/ajax_modal_just.php?cd_os='+os+'&tp='+tp)
-            $('#modal_just').modal('show')
-        }    
-
-        function ajax_concluir_solicitacao(os){
-            texto = document.getElementById('txt_just').value
-            if(texto != ''){
-                $.ajax({
-                    url:"funcoes/solicitacao/ajax_concluir_solicitacao.php",
-                    type: "POST",
-                    data: {
-                        os: os,
-                        texto: texto
-                    },
-                    cache: false,
-                    success: function(dataResult){                    
-                        console.log(dataResult)
-                        location.reload();
-                        
-                    }
-                })
-            }else{
-
-                alert('Informe uma justificativa!')
-            }
-        }
-
         
     </script>
 
