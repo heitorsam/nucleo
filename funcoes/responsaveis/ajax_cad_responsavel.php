@@ -8,9 +8,7 @@
     $usuario = $_POST['usuario'];
 
     $email = $_POST['email'];
-
-    $funcao = $_POST['funcao'];
-
+    
     $consulta_responsavel = "SELECT usu.cd_usuario, usu.nm_usuario, func.cd_func FROM dbasgu.usuarios usu
                                 INNER JOIN dbamv.funcionario func
                                 ON func.nm_func = usu.nm_usuario
@@ -24,21 +22,19 @@
 
     $responsavel = $row_responsavel['CD_FUNC'];
 
-    $consulta_insert = "INSERT INTO portal_projetos.responsavel 
+    $consulta_insert = "INSERT INTO nucleoinfo.responsavel 
                                     (
                                     CD_RESPONSAVEL,     
                                     CD_USUARIO_MV,  
                                     EMAIL, 
-                                    TP_FUNCAO,
                                     CD_USUARIO_CADASTRO,
                                     HR_CADASTRO,
                                     CD_USUARIO_ULT_ALT,
                                     HR_ULT_ALT)  
                                 VALUES(
-                                        portal_projetos.SEQ_CD_RESPONSAVEL.nextval,
+                                    nucleoinfo.SEQ_CD_RESPONSAVEL.nextval,
                                         '$responsavel',
                                         '$email',
-                                        '$funcao',
                                         '$usuario',
                                         sysdate,
                                         '$var_usuario',

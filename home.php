@@ -54,11 +54,18 @@
     <div class="div_br"> </div> 
     <div class="div_br"> </div> 
     <h11><i class="fa-brands fa-telegram"></i> Solicitações Realizadas</h11>
-    
     <div id="lista_solic_usuario"></div>
 
 
     <!-- //FIM DO BLOCO CHAMADOS SOLICITADOS PELO USUARIO// -->
+
+    <!--BLOCO CHAMADOS RECEBIDOS PELO RESPONSAVEL-->
+    <div class="div_br"> </div> 
+    <div class="div_br"> </div> 
+    <h11><i class="fa-brands fa-telegram"></i> Solicitações Recebidas</h11>
+
+
+    <!-- //FIM DO BLOCO CHAMADOS RECEBIDOS PELO RESPONSAVEL// -->
 
     <!-- Modal -->
     <div class="modal fade" id="modal_detalhes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -85,7 +92,7 @@
                 
                 ?>
                         <div class="modal-footer">
-                            <button type="button"  class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                            <button type="button"  class="btn btn-primary" data-dismiss="modal">Receber</button>
                         </div>
                 <?php
 
@@ -118,8 +125,6 @@
     ckb_painel = '';
     ckb_relatorio = '';
     ckb_desenvolvimento = '';
-
-
 
     function controla_check_box(tp_check_box){
 
@@ -197,7 +202,7 @@
             checkbox3 = document.getElementById('ckb_relatorio');
             checkbox4 = document.getElementById('ckb_desenvolvimento');
 
-            if(checkbox3.checked){
+            if(checkbox4.checked){
 
                 ckb_query = 'false';
                 ckb_painel = 'false';

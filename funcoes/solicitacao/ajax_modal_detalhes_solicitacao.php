@@ -138,6 +138,25 @@ if($var_adm == 'S'){
 
         </div>
 
+        <div class="col-md-3">
+
+            Validado Por:
+            <select class="form form-control" id="prestador_responsavel" disabled>
+
+                <option value="All">Selecione</option>
+                
+
+            <select>
+
+        </div>
+
+        
+        <div class="col-md-3">
+
+            Data Entrega:
+            <input type="date" class="form form-control" id="data_entrega" disabled>
+
+        </div>
 
     </div>
 
