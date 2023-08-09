@@ -9,8 +9,10 @@
     $usu_adm = $_SESSION['SN_USU_ADM'];
 
     $consulta_solicitado = "SELECT CASE
+                                WHEN sol.CD_RESPONSAVEL IS NOT NULL AND solmv.TP_SITUACAO = 'C' THEN 'Finalizado'
                                 WHEN sol.CD_RESPONSAVEL IS NULL THEN 'Solicitado'
-                                ELSE 'Recebido'
+                                WHEN sol.CD_RESPONSAVEL IS NOT NULL THEN 'Andamento'
+                                ELSE ''
                                 END AS TP_STATUS_SOLICITACAO,
                                 sol.CD_SOLICITACAO,
                                 sol.CD_OS_MV,
@@ -20,16 +22,27 @@
                                 solmv.DS_SERVICO,
                                 FNC_LONG_PARA_CHAR_OS(solmv.CD_OS) AS DS_OBSERVACAO,
                                 sol.CD_RESPONSAVEL,
-                                sol.ESTIMATIVA_ENTREGA
+                                TO_CHAR(sol.ESTIMATIVA_ENTREGA,'DD/MM/YYYY') AS ESTIMATIVA_ENTREGA
                             FROM nucleoinfo.SOLICITACAO sol
                             INNER JOIN dbamv.SOLICITACAO_OS solmv
                             ON solmv.CD_OS = sol.CD_OS_MV";
 
                             if($usu_adm == 'N'){
 
-                                $consulta_solicitado .= " WHERE sol.CD_USUARIO_CADASTRO = '$usuario_logado'";
+                                $consulta_solicitado .= " WHERE sol.CD_USUARIO_CADASTRO = '$usuario_logado'
+                                                          ORDER BY sol.CD_SOLICITACAO DESC ";
 
                             }
+
+                            if($usu_adm == 'S'){
+
+                                $consulta_solicitado .= " WHERE sol.CD_SOLICITACAO NOT IN (SELECT sol.CD_SOLICITACAO 
+                                                          FROM nucleoinfo.SOLICITACAO sol 
+                                                         WHERE sol.CD_RESPONSAVEL = '$usuario_logado')
+                                                         ORDER BY sol.CD_SOLICITACAO DESC";
+
+                            }
+
 
     $res_solicitados = oci_parse($conn_ora, $consulta_solicitado);
                        oci_execute($res_solicitados);

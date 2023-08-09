@@ -30,6 +30,15 @@
 
     $row_setor = oci_fetch_array($res_setor);
 
+    $var_setor_localidade = $row_setor['CD_SETOR'];
+
+    $localidade = "SELECT loc.CD_LOCALIDADE,
+                          loc.DS_LOCALIDADE 
+                   FROM dbamv.LOCALIDADE loc
+                   WHERE loc.CD_SETOR = $var_setor_localidade";
+    $res_localidade = oci_parse($conn_ora, $localidade);
+                      oci_execute($res_localidade);
+
 
 ?>
 
@@ -53,6 +62,30 @@
         
             Setor:
             <input readonly type="text" id="nm_solicitante" class="form form-control" value="<?php echo $row_setor['NM_SETOR']; ?>">
+
+
+        </div>
+
+        
+        <div class="col-md-4">
+
+        
+            Localidade:
+            <select id="localidade_setor" class="form form-control">
+                
+                <option value="All">Selecione</option>
+
+                <?php
+                while($row_loc = oci_fetch_array($res_localidade)){
+
+                    echo '<option value="' . $row_loc['CD_LOCALIDADE'] . '">'. $row_loc['DS_LOCALIDADE'] .'</option>';
+
+                }
+
+
+                ?>
+
+            </select>
 
 
         </div>
@@ -232,6 +265,9 @@ function ajax_abrir_os(){
     var inpt_email = $("#inpt_email").val();
     var descricao = $("#descricao").val();
     var motivo = $("#motivo").val();
+    var localidade = $("#localidade_setor").val();
+
+    console.log(localidade);
 
     var fileInput = document.getElementById('file');
     var formData = new FormData();
@@ -241,6 +277,7 @@ function ajax_abrir_os(){
     formData.append('inpt_email', inpt_email);
     formData.append('descricao', descricao);
     formData.append('motivo', motivo);
+    formData.append('localidade', localidade);
     formData.append('usuariologado', usuario_logado);
     formData.append('nm_usuario_logado', nome_usuario_logado);
     formData.append('st_usuario_logado', setor_usuario_logado);

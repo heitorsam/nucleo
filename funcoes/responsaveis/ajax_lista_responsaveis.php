@@ -2,11 +2,11 @@
 
     include '../../conexao.php';
 
-    $consulta = "SELECT rp.*, 
-                        (SELECT COUNT(*) 
-                         FROM nucleoinfo.solicitacao sol 
-                         WHERE sol.cd_responsavel = rp.cd_responsavel) AS QTD 
-                    FROM nucleoinfo.RESPONSAVEL rp";
+    $consulta = "SELECT rp.CD_RESPONSAVEL, 
+                        rp.CD_USUARIO_MV,
+                        (SELECT usu.NM_USUARIO FROM dbasgu.USUARIOS usu WHERE usu.CD_USUARIO = rp.CD_USUARIO_MV) AS NM_USUARIO,
+                        rp.EMAIL
+                     FROM nucleoinfo.RESPONSAVEL rp";
 
     $resultado = oci_parse($conn_ora, $consulta);
 
@@ -42,14 +42,14 @@
             echo '<tr>';
 
                 echo '<td class="align-middle" style="text-align: center;">' . $row['CD_RESPONSAVEL'] . '</td>';
-                echo '<td class="align-middle" style="text-align: center;">' . $row['CD_USUARIO_CADASTRO'] . '</td>';?>
+                echo '<td class="align-middle" style="text-align: center;">' . $row['NM_USUARIO'] . '</td>';?>
 
-                    <td class="align-middle"  style="text-align: center;" id="EMAIL<?php echo $row['CD_USUARIO_CADASTRO'] ?>"
-                    ondblclick="fnc_editar_campo('nucleoinfo.RESPONSAVEL', 'EMAIL', '<?php echo @$row['EMAIL']; ?>', 'CD_USUARIO_CADASTRO', '<?php echo @$row['CD_USUARIO_CADASTRO']; ?>', '')">
+                    <td class="align-middle"  style="text-align: center;" id="EMAIL<?php echo $row['CD_RESPONSAVEL'] ?>"
+                    ondblclick="fnc_editar_campo('nucleoinfo.RESPONSAVEL', 'EMAIL', '<?php echo @$row['EMAIL']; ?>', 'CD_RESPONSAVEL', '<?php echo @$row['CD_RESPONSAVEL']; ?>', '')">
                     <?php echo $row['EMAIL'] ?> </td>
 
                     <td class="align-middle" style="text-align: center;">
-                        <button class="btn btn-adm" id="btn_colet" onclick="ajax_apagar_responsavel('<?php echo $row['CD_USUARIO_CADASTRO'] ?>')" <?php if($row['QTD'] != 0){ echo 'disabled'; } ?>>
+                        <button class="btn btn-adm" id="btn_colet" onclick="ajax_apagar_responsavel('<?php echo $row['CD_RESPONSAVEL'] ?>')">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </td>

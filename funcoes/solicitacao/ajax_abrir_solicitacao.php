@@ -8,6 +8,7 @@
   $var_inpt_email = $_POST['inpt_email'];
   $var_inpt_descricao = $_POST['descricao'];
   $var_inpt_motivo = $_POST['motivo'];
+  $var_inpt_localidade = $_POST['localidade'];
   $var_usuario_logado = $_POST['usuariologado'];
   $var_nome_usuario_logado = $_POST['nm_usuario_logado'];
   $st_usuario_logado = $_POST['st_usuario_logado'];
@@ -77,7 +78,7 @@
                           87 as CD_TIPO_OS, 
                           trim('$var_usuario_logado') as NM_USUARIO,
                           SYSDATE as DT_ULTIMA_ATUALIZACAO, 
-                          NULL as CD_LOCALIDADE, 
+                          $var_inpt_localidade as CD_LOCALIDADE, 
                           NULL as TP_LOCAL,
                           NULL as CD_BEM,
                           NULL as TP_MOT_CORRET,

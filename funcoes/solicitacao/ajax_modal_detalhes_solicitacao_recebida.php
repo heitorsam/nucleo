@@ -23,29 +23,40 @@
                                    solmv.DS_SERVICO,
                                    FNC_LONG_PARA_CHAR_OS(solmv.CD_OS) AS DS_OBSERVACAO,
                                    sol.CD_RESPONSAVEL,
+                                   (SELECT usu.NM_USUARIO FROM dbasgu.USUARIOS usu WHERE usu.CD_USUARIO = sol.CD_RESPONSAVEL) AS NM_RESPONSAVEL,
                                    sol.ESTIMATIVA_ENTREGA,
                                    (SELECT st.NM_SETOR FROM dbamv.SETOR st WHERE st.CD_SETOR = solmv.CD_SETOR) AS DS_SETOR,
                                    (SELECT loc.DS_LOCALIDADE FROM dbamv.LOCALIDADE loc WHERE loc.CD_LOCALIDADE = solmv.CD_LOCALIDADE) AS DS_LOCALIDADE_OS,
                                    solmv.DS_RAMAL,
-                                   solmv.DS_EMAIL_ALTERNATIVO
+                                   solmv.DS_EMAIL_ALTERNATIVO,
+                                   itsol.CKB_QUERY,
+                                   itsol.CKB_PAINEL,
+                                   itsol.CKB_RELATORIO,
+                                   itsol.CKB_DESENVOLVIMENTO,
+                                   FNC_LONG_PARA_CHAR_NUCLEOINFO(sol.CD_SOLICITACAO) AS DS_CONSIDERACOES,
+                                   TRIM(TO_CHAR(solmv.DT_USUARIO_RECEBE_SOL_SERV,'DD/MM/YYYY HH24:MI:SS')) AS  DT_USUARIO_RECEBE_SOL_SERV
                             FROM nucleoinfo.SOLICITACAO sol
                             INNER JOIN dbamv.SOLICITACAO_OS solmv
                             ON solmv.CD_OS = sol.CD_OS_MV
+                            INNER JOIN nucleoinfo.IT_SOLICITACAO itsol
+                            ON itsol.CD_SOLICITACAO = sol.CD_SOLICITACAO
                             WHERE sol.CD_OS_MV = $var_os
                             AND sol.CD_SOLICITACAO = $var_solicitacao"; 
+
                             $res_solicitados = oci_parse($conn_ora, $consulta_solicitado);
                             oci_execute($res_solicitados); 
                             $row = oci_fetch_array($res_solicitados);
 
-    $responsavel_os = "SELECT resp.CD_USUARIO_MV,
-                            (SELECT usu.NM_USUARIO FROM dbasgu.USUARIOS usu WHERE usu.CD_USUARIO = resp.CD_USUARIO_MV) AS NM_RESPONSAVEL
-                       FROM nucleoinfo.RESPONSAVEL resp";
+    $nao_validador = $row['CD_RESPONSAVEL'];
 
-    $res_responsavel_os= oci_parse($conn_ora, $responsavel_os);
-    oci_execute($res_responsavel_os); 
+    $responsavel_validador = "SELECT resp.CD_USUARIO_MV,
+                                (SELECT usu.NM_USUARIO FROM dbasgu.USUARIOS usu WHERE usu.CD_USUARIO = resp.CD_USUARIO_MV) AS NM_VALIDADOR 
+                             FROM nucleoinfo.RESPONSAVEL resp
+                             WHERE resp.CD_USUARIO_MV NOT IN ('$nao_validador')";
 
+    $res_responsavel_validador = oci_parse($conn_ora, $responsavel_validador);
+                       oci_execute($res_responsavel_validador); 
 ?>
-
 
 <div class="row">
 
@@ -81,8 +92,6 @@
 </div>
 
 <div class="div_br"> </div>
-<div class="div_br"> </div>
-
 
 <div class="row">
 
@@ -98,6 +107,7 @@
 
 <div class="div_br"> </div>
 
+<input type="text" hidden id="data_recebimento_serv" value="<?php echo $row['DT_USUARIO_RECEBE_SOL_SERV']; ?>">
 
 <div class="row">
     <div class="col-md-12">
@@ -113,19 +123,13 @@
 
     <div class="col-md-12" style="text-align: center;">
 
-        <button class="btn btn-primary" onclick="ajax_chama_modal_galeria(<?php echo $row['CD_OS_MV']; ?>)"><i class="fa-regular fa-folder-open"></i> Anexos</button>
+        <button class="btn btn-primary" onclick="ajax_chama_modal_galeria_chamado_recebido(<?php echo $row['CD_OS_MV']; ?>)"><i class="fa-regular fa-folder-open"></i> Anexos</button>
 
     </div>
 
 </div>
 
 <div class="div_br"> </div>
-
-<?php
-
-if($var_adm == 'S'){
-
-?>
 
     <div class="fnd_azul"><i class="fa-solid fa-globe efeito-zoom"></i> <b>Nucleo de Informações</b></div>
 
@@ -138,7 +142,7 @@ if($var_adm == 'S'){
             Query:
             <span class="espaco_pequeno"></span>
             <span class="espaco_pequeno"></span>
-            <input onclick="controla_check_box('1')" type="checkbox" class="check_box" id="ckb_query">
+            <input type="checkbox" class="check_box" id="ckb_query" <?php if($row['CKB_QUERY'] == 'true'){ echo 'checked'; } ?> disabled>
 
         </div>
 
@@ -146,21 +150,21 @@ if($var_adm == 'S'){
             Painel:
             <span class="espaco_pequeno"></span>
             <span class="espaco_pequeno"></span>
-            <input onclick="controla_check_box('2')" type="checkbox" class="check_box" id="ckb_painel">
+            <input type="checkbox" class="check_box" id="ckb_painel" <?php if($row['CKB_PAINEL'] == 'true'){ echo 'checked'; } ?> disabled>
         </div>
 
         <div class="col-md-3 d-flex align-items-center justify-content-center">
             Relatorio:
             <span class="espaco_pequeno"></span>
             <span class="espaco_pequeno"></span>
-            <input onclick="controla_check_box('3')" type="checkbox" class="check_box" id="ckb_relatorio">
+            <input type="checkbox" class="check_box" id="ckb_relatorio" <?php if($row['CKB_RELATORIO'] == 'true'){ echo 'checked'; } ?> disabled>
         </div>
 
         <div class="col-md-3 d-flex align-items-center justify-content-center">
             Desenvolvimento:
             <span class="espaco_pequeno"></span>
             <span class="espaco_pequeno"></span>
-            <input onclick="controla_check_box('4')" type="checkbox" class="check_box" id="ckb_desenvolvimento">
+            <input type="checkbox" class="check_box" id="ckb_desenvolvimento" <?php if($row['CKB_DESENVOLVIMENTO'] == 'true'){ echo 'checked'; } ?> disabled>
         </div>
 
     </div>
@@ -172,28 +176,17 @@ if($var_adm == 'S'){
         <div class="col-md-3">
 
             Previsão de Entrega:
-            <input type="date" class="form form-control" id="data_prevista">
-
+            <input disabled type="date" class="form form-control" id="data_entrega" value="<?php echo date_format(date_create($row['ESTIMATIVA_ENTREGA']), 'Y-m-d'); ?>">
+        
         </div>
 
         <div class="col-md-3">
 
             Responsavel:
-            <select class="form form-control" id="prestador_responsavel">
+            <select class="form form-control" id="prestador_responsavel_receb" style="background-color: #e9ecef">
 
-                <option value="All">Selecione</option>
+                <option readonly value="<?php echo $row['CD_RESPONSAVEL']; ?>"><?php echo $row['NM_RESPONSAVEL']; ?></option>
                 
-                <?php
-
-                    while($row = oci_fetch_array($res_responsavel_os)){
-
-                        echo '<option value="' . $row['CD_USUARIO_MV'] . '">' . $row['NM_RESPONSAVEL']  . '</option>';
-                        
-                    }
-
-                ?>
-                
-            
             <select>
 
         </div>
@@ -201,9 +194,22 @@ if($var_adm == 'S'){
         <div class="col-md-3">
 
             Validado Por:
-            <select class="form form-control" id="prestador_validador" disabled>
+            <select class="form form-control" id="prestador_validador_receb">
 
                 <option value="All">Selecione</option>
+
+
+                <?php
+
+                    while($row_validaores = oci_fetch_array($res_responsavel_validador)){
+
+                        echo '<option value="' . $row_validaores['CD_USUARIO_MV'] . '">' . $row_validaores['NM_VALIDADOR'] . '</option>';
+
+                    }
+
+
+
+                ?>
                 
 
             <select>
@@ -214,7 +220,7 @@ if($var_adm == 'S'){
         <div class="col-md-3">
 
             Data Entrega:
-            <input type="date" class="form form-control" id="data_entrega" disabled>
+            <input type="date" class="form form-control" id="data_ent_recebida">
 
         </div>
 
@@ -225,16 +231,11 @@ if($var_adm == 'S'){
     <div class="row">
 
         <div class="col-md-12">
+
             Considerações
-            <textarea style="background-color: white" class="textarea"  id="considerações" rows="4"></textarea>
+            <textarea readonly style="background-color: #e9ecef" class="textarea" id="consideracoes" rows="4"><?php echo $row['DS_CONSIDERACOES']; ?></textarea>
+            
         </div>
 
+
     </div>
-
-    
-
-<?php
-
-}
-
-?>

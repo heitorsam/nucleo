@@ -27,13 +27,13 @@
 												CASE
 													WHEN :usuario IN (SELECT DISTINCT puia.CD_USUARIO
 																		FROM dbasgu.PAPEL_USUARIOS puia
-																		WHERE puia.CD_PAPEL = 477) THEN 'S' --PAPEL GLOBAL DE ACESSO
+																		WHERE puia.CD_PAPEL = 477) THEN 'S' --PAPEL COMUM
 													ELSE 'N'
 												END SN_USU_GLOBAL,
 												CASE
 													WHEN :usuario IN (SELECT DISTINCT puia.CD_USUARIO
 																		FROM dbasgu.PAPEL_USUARIOS puia
-																		WHERE puia.CD_PAPEL = 478) THEN 'S' --PAPEL GLOBAL DE ACESSO ADM
+																		WHERE puia.CD_PAPEL = 478) THEN 'S' --PAPEL ACESSO ADM
 													ELSE 'N'
 												END SN_USU_ADM
 
