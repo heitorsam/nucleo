@@ -23,7 +23,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="img/logo/icone_santa_casa_sjc_colorido.png">
     <meta name="mobile-web-app-capable" content="yes">
-    <title>Portal Projetos</title>
+    <title>Nucleo</title>
     <!--CSS-->
     <?php 
         include 'css/style.php';
@@ -33,8 +33,8 @@ session_start();
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/302b2cb8e2.js" crossorigin="anonymous"></script>
-    <!--GRAFICOS CHART JS 
-    <script src="js/Chart.js-2.9.4/dist/Chart.js"></script>--> 
+    <!--GRAFICOS CHART JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"> </script>
     <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
@@ -45,7 +45,7 @@ session_start();
         <nav class="navbar navbar-expand-md navbar-dark bg-color">
             <a class="navbar-brand" href="home.php">
                 <img src="img/logo/icone_santa_casa_sjc_branco.png" height="28px" width="28px" class="d-inline-block align-top efeito-zoom" alt="Santa Casa de São José dos Campos">
-                <h10>Portal Projetos</h10>
+                <h10>Nucleo de Informações</h10>
             </a>
             
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06" aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
