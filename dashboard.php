@@ -42,8 +42,8 @@
     <div style="width: 50%; height: 250px; display: flex; justify-content: center; align-items: center; border: solid 1px black;">
                
         <div style="width: 75%;">
-            <h6></h6>
-            <canvas id="chart_os_concluidas"></canvas>
+            <h6>Finalizadas Por Usuarios</h6>
+            <canvas id="chart_os_finalizadas_por_usuario"></canvas>
         </div>
 
     </div>
@@ -51,7 +51,7 @@
                
         <div style="width: 75%;">
             <h6>Os Finalizadas</h6>
-            <canvas id="chart_os_concluidas"></canvas>
+            <canvas id=""></canvas>
         </div>
 
     </div>
@@ -62,8 +62,9 @@
 
     //DEFININDO CONSTANTES PARA PODER TRABALHAR COM O ELEMENTO
 
-        const chart_os = document.getElementById('chart_os_concluidas');
-        const chart_os_abertas = document.getElementById('chart_os_abertas');
+    const chart_os = document.getElementById('chart_os_concluidas');
+    const chart_os_abertas = document.getElementById('chart_os_abertas');
+    const finalizadas_usuario = document.getElementById('chart_os_finalizadas_por_usuario');
 
     /////////////////////////////////////////////////////////////////////
 
@@ -73,6 +74,7 @@
 
             atualizar_grafico_os(); 
             atualizar_grafico_os_abertas();
+            atualizar_grafico_os_fina_usuarios();
 
         };
 
@@ -98,24 +100,60 @@
             });
 
         }
-
+       
         function atualizar_grafico_os_abertas(){
 
-            $.ajax({
-                url: 'funcoes/dashboard/ajax_select_os_abertas.php',
+                $.ajax({
+                    url: 'funcoes/dashboard/ajax_select_os_abertas.php',
 
-                type: 'POST', cache: false,
-                success: function(dataResult){
+                    type: 'POST', cache: false,
+                    success: function(dataResult){
 
-                    const array = JSON.parse(dataResult);
+                        const array = JSON.parse(dataResult);
 
-                    create_chart_os_abertas(array);
+                        create_chart_os_abertas(array);
 
-                }
+                    }
 
             });
 
         }
+
+        function atualizar_grafico_os_fina_usuarios() {
+            $.ajax({
+                url: 'funcoes/dashboard/ajax_select_os_finalizadas_por_usuario.php',
+                type: 'POST',
+                cache: false,
+                success: function(dataResult) {
+                    const array = JSON.parse(dataResult);
+
+                    const usuarios = [];
+                    const quantidadesPorUsuario = new Map();
+
+                    // Inicializar um array de quantidades com zeros para todos os meses
+                    const quantidadesZeradas = Array(12).fill(0);
+
+                    // Processar e usar os dados recebidos diretamente
+                    for (let i = 0; i < array.length; i++) {
+                        const usuario = array[i].NM_USUARIO;
+                        const qtd = array[i].QTD;
+                        const mes = array[i].MES - 1; // Ajustar o índice do mês (0-11)
+
+                        if (!usuarios.includes(usuario)) {
+                            usuarios.push(usuario);
+                            quantidadesPorUsuario.set(usuario, quantidadesZeradas.slice());
+                        }
+
+                        const usuarioQuantidades = quantidadesPorUsuario.get(usuario);
+                        usuarioQuantidades[mes] = qtd;
+                    }
+
+                    create_chart_os_finalizadas_por_usu(usuarios, quantidadesPorUsuario);
+                }
+            });
+        }
+
+
 
 
     //////////////////////////////////////////////
@@ -188,9 +226,7 @@
     }
 
     function create_chart_os_abertas(quantidade){
-
-        console.log(quantidade);
-        const coresMeses = [
+        const coresMeses2 = [
 
             'rgba(255, 99, 132, 0.8)', // Jan
             'rgba(54, 162, 235, 0.8)', // Fev
@@ -216,7 +252,7 @@
                     {
                         //label: 'Finalizadas',
                         data: quantidade,
-                        backgroundColor: coresMeses,
+                        backgroundColor: coresMeses2,
                         borderWidth: 1
                     }
                 ]
@@ -246,6 +282,61 @@
                     legend: {
                         position: 'top',
                     display: false // Oculta a legenda
+                    }
+                }
+            }
+        });
+
+    }
+
+    function create_chart_os_finalizadas_por_usu(usuarios, quantidadesPorUsuario) {
+
+        const coresUsuario = [
+
+            'rgba(255, 99, 132, 0.8)', // Jan
+            'rgba(54, 162, 235, 0.8)', // Fev
+            'rgba(75, 192, 192, 0.8)', // Mar
+            'rgba(255, 206, 86, 0.8)', // Abr
+            'rgba(255, 159, 64, 0.8)',  // Mai
+            'rgba(153, 102, 255, 0.8)',// Jun
+            'rgba(54, 162, 235, 0.8)', // Jul
+            'rgba(255, 99, 132, 0.8)', // Ago
+            'rgba(75, 192, 192, 0.8)', // Set
+            'rgba(255, 206, 86, 0.8)', // Out
+            'rgba(255, 159, 64, 0.8)',  // Nov
+            'rgba(153, 102, 255, 0.8)',// Dez
+            
+        ];
+
+        new Chart(finalizadas_usuario, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: usuarios.map((usuario, index) => ({
+                    label: usuario,
+                    data: quantidadesPorUsuario.get(usuario),
+                    backgroundColor: coresUsuario[index % coresUsuario.length], // Usar cores cíclicas
+                    borderWidth: 1
+                }))
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stepSize: 1,
+                        precision: 0
+                    }
+                },
+                indexAxis: 'x',
+                elements: {
+                    bar: {
+                        borderWidth: 2
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
                     }
                 }
             }
