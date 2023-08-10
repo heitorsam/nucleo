@@ -22,6 +22,7 @@
                                 solmv.DS_SERVICO,
                                 FNC_LONG_PARA_CHAR_OS(solmv.CD_OS) AS DS_OBSERVACAO,
                                 sol.CD_RESPONSAVEL,
+                                (SELECT usu.NM_USUARIO FROM dbasgu.USUARIOS usu WHERE usu.CD_USUARIO = sol.CD_RESPONSAVEL) AS NM_RESPONSAVEL,
                                 TO_CHAR(sol.ESTIMATIVA_ENTREGA,'DD/MM/YYYY') AS ESTIMATIVA_ENTREGA
                             FROM nucleoinfo.SOLICITACAO sol
                             INNER JOIN dbamv.SOLICITACAO_OS solmv
@@ -82,7 +83,7 @@
            
             if($row['CD_RESPONSAVEL'] != ''){
 
-                echo '<td class="align-middle" style=" cursor: pointer; text-align: center; border: solid 2px #3185c1; padding: 10px !important; !important; color: black !important;">' . $row['CD_RESPONSAVEL'] . '</td>';
+                echo '<td class="align-middle" style=" cursor: pointer; text-align: center; border: solid 2px #3185c1; padding: 10px !important; !important; color: black !important;">' . $row['NM_RESPONSAVEL'] . '</td>';
             
             }else{
 
