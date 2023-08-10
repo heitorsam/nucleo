@@ -39,7 +39,8 @@
         </div>
 
     </div>
-    <div style="width: 50%; height: 250px; display: flex; justify-content: center; align-items: center; border: solid 1px black;">
+
+    <div style="width: 50%; height: 250px; display: flex; justify-content: center; align-items: center;">
                
         <div style="width: 75%;">
             <h6>Finalizadas Por Usuarios</h6>
@@ -50,7 +51,7 @@
     <div style="width: 50%; height: 250px; display: flex; justify-content: center; align-items: center; border: solid 1px black;">
                
         <div style="width: 75%;">
-            <h6>Os Finalizadas</h6>
+            <h6>Abertas por Setor</h6>
             <canvas id=""></canvas>
         </div>
 
