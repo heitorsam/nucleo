@@ -28,10 +28,11 @@
                             INNER JOIN dbamv.SOLICITACAO_OS solmv
                             ON solmv.CD_OS = sol.CD_OS_MV";
 
-                            if($usu_adm == 'N'){
+                            if($usu_adm == 'N' && $usu_global == 'S'){
 
                                 $consulta_solicitado .= " WHERE sol.CD_USUARIO_CADASTRO = '$usuario_logado'
-                                                          ORDER BY sol.CD_SOLICITACAO DESC ";
+                                                               AND solmv.TP_SITUACAO = 'S'
+                                                               ORDER BY sol.CD_SOLICITACAO DESC ";
 
                             }
 
@@ -40,6 +41,7 @@
                                 $consulta_solicitado .= " WHERE sol.CD_SOLICITACAO NOT IN (SELECT sol.CD_SOLICITACAO 
                                                           FROM nucleoinfo.SOLICITACAO sol 
                                                          WHERE sol.CD_RESPONSAVEL = '$usuario_logado')
+                                                         AND solmv.TP_SITUACAO = 'S'
                                                          ORDER BY sol.CD_SOLICITACAO DESC";
 
                             }

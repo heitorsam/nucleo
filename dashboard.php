@@ -420,8 +420,11 @@
             }))
         },
         options: {
+
+            
             scales: {
                 y: {
+                    
                     beginAtZero: true,
                     stepSize: 1,
                     precision: 0
