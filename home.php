@@ -97,12 +97,6 @@
     }
     ?>
 
-        
-    <?php
-
-    if($usu_adm == 'S'){
-
-    ?>
 
         <!-- //FIM DO BLOCO CHAMADOS SOLICITADOS PELO USUARIO// -->
 
@@ -124,14 +118,6 @@
 
         <div id="lista_solic_finalizadas"></div>
         <div id="mensagem_acoes_finalizadas"></div>
-
-
-
-    <?php  
-
-    }
-
-    ?>
 
 
 

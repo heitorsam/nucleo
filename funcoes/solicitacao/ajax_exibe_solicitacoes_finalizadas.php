@@ -8,6 +8,7 @@
     //RECEBENDO VARIAVEIS
     $var_data = $_GET['data_filtro'];
     $usuario_logado = $_SESSION['usuarioLogin'];
+    $usu_global = $_SESSION['SN_USU_GLOBAL'];
     $usu_adm = $_SESSION['SN_USU_ADM'];
 
     //INICIANDO A CONSULTA
@@ -26,6 +27,16 @@
                             INNER JOIN dbamv.SOLICITACAO_OS solmv
                             ON solmv.CD_OS = sol.CD_OS_MV
                             WHERE TO_CHAR(solmv.DT_EXECUCAO,'DD/MM/YYYY') = '$var_data'";
+
+                            if($usu_global == 'S' &&  $usu_adm == 'N'){
+
+                                $consulta_solicitado .= " AND sol.CD_USUARIO_CADASTRO = '$usuario_logado'
+                                                         AND solmv.TP_SITUACAO = 'C' 
+                                                         ORDER BY sol.CD_SOLICITACAO DESC ";
+
+
+
+                            }
 
                             if($usu_adm == 'S'){
 
